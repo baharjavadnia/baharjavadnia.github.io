@@ -650,7 +650,11 @@ footer .brand { margin: 0; color: var(--ink); }
 
   /* Hero playground: Bahar's 3D shapes, with physics */
   var hero = document.getElementById('top'), pg = document.getElementById('playground');
-  var names = ['s12', 's10', 's15', 's3', 's14', 's18', 's19', 's22', 's24', 's16', 's4', 's17', 's1', 's8'];
+  // Colour order: orange, blue, lime, purple, yellow, red, teal, orange, blue, green, purple, cyan, lilac, blue.
+  // Neighbours never share a colour, so each new shape looks different from the last one.
+  var names = ['s12', 's10', 's16', 's3', 's14', 's19', 's22', 's1', 's17', 's24', 's18', 's15', 's4', 's8'];
+  var cursor = 0;
+  function nextName() { var n = names[cursor % names.length]; cursor++; return n; }
   var small = window.innerWidth < 700;
   function sizeFor() { return small ? 58 + Math.random() * 30 : 92 + Math.random() * 44; }
   function makeImg(name, size) {
@@ -688,7 +692,7 @@ footer .brand { margin: 0; color: var(--ink); }
     }
     var W0 = hero.clientWidth, count = small ? 8 : 13;
     for (var k = 0; k < count; k++) (function (k) {
-      setTimeout(function () { add(names[k % names.length], W0 * (0.1 + 0.8 * Math.random()), -80 - Math.random() * 200); }, 250 + k * 140);
+      setTimeout(function () { add(nextName(), W0 * (0.1 + 0.8 * Math.random()), -80 - Math.random() * 200); }, 250 + k * 140);
     })(k);
     var drag = null;
     function local(e) { var r = hero.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
@@ -703,7 +707,7 @@ footer .brand { margin: 0; color: var(--ink); }
     }
     hero.addEventListener('click', function (e) {
       if (e.target.closest('a, button, .shape')) return;
-      var p = local(e); add(names[Math.floor(Math.random() * names.length)], p.x, Math.min(p.y, 40) - 60);
+      var p = local(e); add(nextName(), p.x, Math.min(p.y, 40) - 60);
     });
     var running = true, last = 0;
     new IntersectionObserver(function (es) { running = es[0].isIntersecting; if (running) requestAnimationFrame(tick); }).observe(hero);
