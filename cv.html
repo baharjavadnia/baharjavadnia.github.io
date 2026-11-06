@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bahar Javadnia, CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #17173A; --muted: #55577A; --hair: #DADCEC; --iris: #4A45C4; --done: #1A7A50;
+  --display: "Bricolage Grotesque", "Hanken Grotesk", sans-serif;
+  --body: "Hanken Grotesk", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@page { size: A4; margin: 11mm 13mm 10mm; }
+* { box-sizing: border-box; }
+html { background: #ECEDF4; }
+body {
+  margin: 0; color: var(--ink); font-family: var(--body); font-size: 9.3pt; line-height: 1.42;
+  -webkit-font-smoothing: antialiased; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.sheet { background: #fff; max-width: 210mm; margin: 24px auto; padding: 13mm 14mm 12mm; box-shadow: 0 1px 3px rgba(23,23,58,.12); }
+@media print { html { background: #fff; } .sheet { margin: 0; padding: 0; box-shadow: none; max-width: none; } }
+@media (max-width: 640px) { .sheet { margin: 0; padding: 20px 16px; } .row, header { grid-template-columns: 1fr !important; } }
+a { color: inherit; text-decoration: none; }
+header { display: grid; grid-template-columns: 1fr auto; gap: 12px 24px; align-items: end; padding-bottom: 12px; border-bottom: 1.5px solid var(--ink); }
+h1 { font-family: var(--display); font-weight: 800; font-size: 28pt; line-height: 0.95; letter-spacing: -0.03em; margin: 0 0 4px; }
+.title { font-family: var(--display); font-weight: 700; font-size: 12.5pt; color: var(--iris); margin: 0; }
+.contact { font-family: var(--mono); font-size: 7.8pt; color: var(--muted); text-align: right; line-height: 1.6; }
+.contact b { color: var(--ink); font-weight: 500; }
+.row { display: grid; grid-template-columns: 30mm 1fr; gap: 0 6mm; padding: 9px 0; border-bottom: 1px solid var(--hair); break-inside: avoid; }
+.row:last-child { border-bottom: 0; }
+.label { font-family: var(--mono); font-size: 7.6pt; letter-spacing: 0.06em; text-transform: uppercase; color: var(--iris); padding-top: 2px; }
+p { margin: 0; }
+.role + .role { margin-top: 9px; }
+.role-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+h2 { font-family: var(--display); font-weight: 700; font-size: 11pt; margin: 0; letter-spacing: -0.005em; }
+h2 span { font-family: var(--body); font-weight: 500; color: var(--muted); font-size: 9.6pt; }
+.when { font-family: var(--mono); font-size: 7.6pt; color: var(--muted); white-space: nowrap; }
+.lead { color: var(--muted); margin: 2px 0 4px; }
+ul { margin: 3px 0 0; padding-left: 13px; }
+li { margin: 2.5px 0; }
+li::marker { color: var(--iris); }
+li b { font-weight: 700; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.k { font-weight: 700; }
+.muted { color: var(--muted); }
+.page-break { break-before: page; }
+</style>
+</head>
+<body>
+<div class="sheet">
+<header>
+  <div>
+    <h1>Bahar Javadnia</h1>
+    <p class="title">Product Designer · designs, builds and measures with Claude Code</p>
+  </div>
+  <div class="contact">
+    <b><a href="mailto:baharjvvd@gmail.com">baharjvvd@gmail.com</a></b><br>
+    <a href="https://baharjavadnia.github.io">baharjavadnia.github.io</a><br>
+    <a href="https://www.linkedin.com/in/baharjavadniauix">linkedin.com/in/baharjavadniauix</a><br>
+    Tehran, Iran · open to remote roles
+  </div>
+</header>
+
+<section class="row">
+  <div class="label">Profile</div>
+  <p>Product designer who owns features end to end: framing the problem with data, designing the interaction and visual detail, shipping the code with Claude Code and staying on it until the numbers say it works. At Treescribe I own the design of an AI chat that drafts legal agreements and have merged 50 pull requests to production since June 2026. I keep a design system and voice the team builds from, and automate my own workflow with agent skills the whole team uses.</p>
+</section>
+
+<section class="row">
+  <div class="label">Experience</div>
+  <div>
+    <div class="role">
+      <div class="role-head"><h2>Treescribe <span>by Query Law · Product Designer · remote</span></h2><span class="when">Jun 2026 to now</span></div>
+      <p class="lead">An AI product that drafts legal agreements through a guided chat. I own the chat, onboarding and the document view, and ship my own changes.</p>
+      <ul>
+        <li><b>AI chat UX:</b> audited every screen of a first-time journey at desktop and phone width (24 findings on 15 screens, 4 critical), redesigned hierarchy and spacing, and shipped the fixes in React and in the AI's prompt skills, including a sticky progress strip for a document's seven stages.</li>
+        <li><b>Onboarding:</b> scoped sign-up to a finished first document into shippable tasks, iterated the design through nine versions in Claude Design and Figma, and shipped sign-in transitions, loading states and the phone-width chat.</li>
+        <li><b>Measurement:</b> built an onboarding funnel in the admin app (six steps from sign-up to a signed agreement, date-range cohorts, median time to a first document, internal accounts excluded) and added the timestamps the data model lacked.</li>
+        <li><b>Analytics:</b> publish my own Google Tag Manager events, tested the GA4 and Clarity playbook step by step on staging, kept staff traffic out of the data and presented the first dashboard to the team.</li>
+        <li><b>Design system:</b> wrote the operative document style guide (colours, type, marks, states, Figma-checked tokens) and approve changes to it; moved status badges to semantic tokens; designed the brand mark and a nine-chapter brand book.</li>
+        <li><b>Voice and quality:</b> wrote the microcopy and voice rules for the interface, API and AI prompts; wrote chat test cases and signed off expected behaviour for the end-to-end suite; ran a question trial across seven invented client businesses.</li>
+        <li><b>Full stack when needed:</b> built information cards in the AI chat end to end (schema, prompt and expandable card); designed the marketing site through fourteen prototype rounds and shipped its legal pages, product clips and agent-readable metadata.</li>
+        <li><b>Agentic workflow:</b> wrote eight Claude Code skills the team uses, including design-translate (a diff retold as user moments), a Claude Design to Figma to export pipeline and a product-loop proposal skill; work across five parallel agent workspaces and built a Telegram bridge to drive them from my phone.</li>
+      </ul>
+    </div>
+    <div class="role">
+      <div class="role-head"><h2>Kara Digital Marketing <span>· UI/UX Designer</span></h2><span class="when">Sep 2024 to Mar 2025</span></div>
+      <ul>
+        <li>Led responsive redesigns for several client websites, from wireframes to high-fidelity prototypes in Figma.</li>
+        <li>Ran cross-functional workshops to agree problem framing, KPIs and UX scope; documented flows, edge states and acceptance criteria.</li>
+        <li>Produced componentised UI with tokens, variants and Dev Mode specs for engineering handoff.</li>
+      </ul>
+    </div>
+    <div class="role">
+      <div class="role-head"><h2>Bazimoon <span>· Content Manager and Graphic Designer</span></h2><span class="when">Sep 2023 to Feb 2024</span></div>
+      <ul><li>Planned and produced social content end to end (photography, video, posters, catalogues) on a content calendar I set up.</li></ul>
+    </div>
+    <div class="role">
+      <div class="role-head"><h2>Safir Digital Marketing <span>· Graphic Designer</span></h2><span class="when">Mar 2023 to Apr 2023</span></div>
+      <ul><li>Designed campaign visuals, posts and stories, consistent with each client's brand.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Earlier projects</div>
+  <ul style="margin:0">
+    <li><b>iLearn</b>, tech-course store (2025): responsive UI and a tokenised design system; simpler path from discovery to checkout, with empty, error and loading states.</li>
+    <li><b>UniMind</b>, student mental-health app (2025): research, personas, journeys, IA and an accessible, RTL-ready interface.</li>
+    <li><b>AlfaTeb and Tavanbakhsh</b>, healthcare websites (2024): information architecture, trust patterns and annotated developer-ready files.</li>
+  </ul>
+</section>
+
+<section class="row">
+  <div class="label">Skills and tools</div>
+  <div class="grid2">
+    <p><span class="k">Product:</span> problem framing, slicing into increments, success metrics, funnels, usability testing, interviews, A/B test design</p>
+    <p><span class="k">Design:</span> interaction and visual design, design systems and tokens, prototyping, UX writing, accessibility (WCAG AA)</p>
+    <p><span class="k">Build:</span> Claude Code, Codex, TypeScript, React, Next.js, Tailwind CSS, HTML, CSS, Git and GitHub</p>
+    <p><span class="k">Tools:</span> Claude Design, Figma, FigJam, Framer, Adobe CC, GA4, Tag Manager, Clarity, Maze, UXTweak</p>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Education</div>
+  <div>
+    <p><b>B.Sc. Multimedia</b>, Kharazmi University, Tehran <span class="muted">· 2021 to now</span></p>
+    <p class="muted">UX Design (Jul 2025) and UI Design (Sep 2025) certificates, Melina Design School</p>
+  </div>
+</section>
+
+<section class="row">
+  <div class="label">Languages</div>
+  <p>English, advanced: my working language · Persian, native · Turkish, upper-intermediate · Italian, pre-intermediate</p>
+</section>
+</div>
+</body>
+</html>

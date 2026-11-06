@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bahar Javadnia, Product Designer</title>
+<meta name="description" content="Product designer who designs, builds and measures features end to end with Claude Code. Currently designing an AI legal-agreement product at Treescribe.">
+<meta property="og:title" content="Bahar Javadnia, Product Designer">
+<meta property="og:description" content="I design product features, build them with Claude Code and stay on them until they work for people.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%234A45C4'/%3E%3Cpath d='M10 16.5l4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F4F5FA;
+  --surface: #FFFFFF;
+  --ink: #17173A;
+  --muted: #5B5D78;
+  --hair: #DADCEC;
+  --hair-strong: #B9BCD6;
+  --iris: #4A45C4;
+  --iris-soft: #E7E6FB;
+  --done: #1A7A50;
+  --display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter: clamp(16px, 4vw, 40px);
+  --max: 1120px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E0F22;
+    --surface: #16182F;
+    --ink: #E9EAF7;
+    --muted: #A2A4C2;
+    --hair: #2A2D4A;
+    --hair-strong: #45496E;
+    --iris: #9C98FF;
+    --iris-soft: #24234A;
+    --done: #4CC38A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E0F22;
+  --surface: #16182F;
+  --ink: #E9EAF7;
+  --muted: #A2A4C2;
+  --hair: #2A2D4A;
+  --hair-strong: #45496E;
+  --iris: #9C98FF;
+  --iris-soft: #24234A;
+  --done: #4CC38A;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration-color: var(--hair-strong); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: var(--iris); color: var(--iris); }
+:focus-visible { outline: 2px solid var(--iris); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 6px; z-index: 10; }
+.skip:focus { left: 16px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Hero */
+.hero { padding: clamp(48px, 9vw, 112px) 0 clamp(40px, 6vw, 72px); }
+.kicker {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 20px;
+}
+.kicker b { color: var(--iris); font-weight: 500; }
+h1 {
+  font-family: var(--display); font-weight: 800; font-optical-sizing: auto;
+  font-size: clamp(52px, 12vw, 184px); line-height: 0.9; letter-spacing: -0.038em;
+  margin: 0 0 clamp(24px, 4vw, 40px);
+}
+.thesis {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(22px, 3.1vw, 36px); line-height: 1.22; letter-spacing: -0.012em;
+  max-width: 24ch; margin: 0 0 20px;
+}
+.thesis em { font-style: normal; color: var(--iris); }
+.sub { color: var(--muted); max-width: 58ch; margin: 0 0 32px; font-size: 18px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 40px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px;
+  border-radius: 999px; font-weight: 600; font-size: 15.5px; text-decoration: none;
+  border: 1.5px solid var(--ink); color: var(--ink); background: transparent;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn:hover { border-color: var(--iris); color: var(--iris); }
+.btn.primary:hover { background: var(--iris); border-color: var(--iris); color: #fff; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-left: 6px; font-size: 15.5px; }
+.ledger {
+  font-family: var(--mono); font-size: 13px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; padding: 14px 0 0; border-top: 1px solid var(--hair);
+}
+.ledger span { white-space: nowrap; }
+.ledger span + span::before { content: "·"; margin: 0 12px; color: var(--hair-strong); }
+.ledger b { color: var(--ink); font-weight: 500; }
+
+/* Progress strip: the signature. It borrows the stage strip I shipped in the Treescribe chat. */
+.strip {
+  position: sticky; top: 0; z-index: 5;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px);
+  border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+}
+.strip ol {
+  list-style: none; margin: 0 auto; max-width: var(--max); padding: 0 var(--gutter);
+  display: flex; align-items: center; height: 56px;
+}
+.strip li { display: flex; align-items: center; flex: 1 1 auto; min-width: 0; }
+.strip li:first-child { flex: 0 0 auto; }
+.strip li + li::before {
+  content: ""; flex: 1 1 auto; height: 1.5px; min-width: 10px; margin: 0 10px;
+  background: var(--hair-strong); transition: background-color .3s ease;
+}
+.strip li.is-done + li::before, .strip li.is-done + li.is-current::before { background: var(--done); }
+.strip a {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--muted);
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; white-space: nowrap; min-height: 44px;
+}
+.strip a:hover { color: var(--ink); }
+.mark {
+  flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--hair-strong);
+  display: grid; place-items: center; background: var(--paper);
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.mark svg { width: 10px; height: 10px; opacity: 0; transition: opacity .2s ease; }
+.mark i { width: 6px; height: 6px; border-radius: 50%; background: var(--iris); display: none; }
+.is-current a { color: var(--ink); font-weight: 500; }
+.is-current .mark { border-color: var(--iris); }
+.is-current .mark i { display: block; }
+.is-done .mark { background: var(--done); border-color: var(--done); }
+.is-done .mark svg { opacity: 1; }
+.is-done a { color: var(--ink); }
+@media (max-width: 760px) {
+  .strip .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .strip .is-current .label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+  .strip li + li::before { margin: 0 6px; }
+  .strip a { gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .strip li + li::before, .mark, .mark svg { transition: none; } }
+
+/* Stages */
+.stages { padding-bottom: 24px; }
+.stage {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px clamp(32px, 6vw, 88px);
+  padding: clamp(56px, 8vw, 96px) 0; border-bottom: 1px solid var(--hair);
+}
+.stage:last-child { border-bottom: 0; }
+.eyebrow {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--iris); margin: 0 0 14px; display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ""; width: 18px; height: 1.5px; background: currentColor; }
+h2 {
+  font-family: var(--display); font-weight: 700; font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.06; letter-spacing: -0.024em; margin: 0; max-width: 14ch;
+}
+.stage-note { color: var(--muted); font-size: 15px; margin: 18px 0 0; max-width: 34ch; }
+.evidence { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; align-content: start; }
+.evidence li { padding-left: 22px; position: relative; }
+.evidence li::before {
+  content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 8px; border-radius: 50%;
+  border: 1.5px solid var(--iris);
+}
+.evidence strong { font-weight: 700; }
+.evidence .meta { display: block; font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.skills { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.skills li { padding: 0; }
+.skills li::before { display: none; }
+.skills { gap: 14px; }
+.skills .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.skills code {
+  font-family: var(--mono); font-size: 13px; background: var(--iris-soft); color: var(--ink);
+  padding: 2px 7px; border-radius: 5px; white-space: nowrap;
+}
+.tokens { display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
+.tokens span {
+  font-family: var(--mono); font-size: 11.5px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--hair);
+  background: var(--surface); display: inline-flex; align-items: center; gap: 7px; color: var(--muted);
+}
+.tokens span::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+
+/* Ship log */
+.section { padding: clamp(56px, 8vw, 96px) 0; border-top: 1px solid var(--hair); }
+.section-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px clamp(32px, 6vw, 88px); margin-bottom: 36px; }
+.section-head p { color: var(--muted); margin: 0; align-self: end; max-width: 52ch; }
+.log { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--hair); border-radius: 14px; overflow: hidden; }
+.log li {
+  display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 16px; align-items: baseline;
+  padding: 14px 20px; border-top: 1px solid var(--hair); font-size: 16px;
+}
+.log li:first-child { border-top: 0; }
+.log time, .log .area { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.log .area { text-align: right; }
+@media (max-width: 640px) {
+  .log li { grid-template-columns: 1fr; gap: 2px; padding: 14px 16px; }
+  .log .area { text-align: left; }
+}
+
+/* Experience */
+.roles { display: grid; gap: 0; }
+.role { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 8px clamp(32px, 6vw, 88px); padding: 24px 0; border-top: 1px solid var(--hair); }
+.role:first-child { border-top: 0; padding-top: 0; }
+.role h3 { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; margin: 0; line-height: 1.2; }
+.role .when { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin: 6px 0 0; }
+.role p { margin: 0; }
+.role ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+.role ul li { margin: 4px 0; }
+
+.projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.projects a {
+  display: block; height: 100%; padding: 18px 18px 20px; border: 1px solid var(--hair); border-radius: 12px;
+  background: var(--surface); text-decoration: none; transition: border-color .15s ease, transform .15s ease;
+}
+.projects a:hover { border-color: var(--iris); color: var(--ink); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .projects a:hover { transform: none; } }
+.projects .type { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--iris); }
+.projects b { display: block; font-family: var(--display); font-weight: 700; font-size: 19px; margin: 6px 0 4px; letter-spacing: -0.01em; }
+.projects span.d { color: var(--muted); font-size: 15px; line-height: 1.5; display: block; }
+
+.facts-title { font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: 0.06em; line-height: 1.6; max-width: none; margin-bottom: 28px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px clamp(24px, 4vw, 56px); }
+.facts h3 { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--iris); font-weight: 500; margin: 0 0 10px; }
+.facts p, .facts ul { margin: 0; color: var(--ink); font-size: 16px; }
+.facts ul { list-style: none; padding: 0; display: grid; gap: 4px; }
+.facts .muted { color: var(--muted); }
+
+footer { padding: clamp(56px, 9vw, 112px) 0 48px; border-top: 1px solid var(--hair); }
+footer h2 { max-width: none; font-size: clamp(36px, 6vw, 72px); margin-bottom: 24px; }
+footer .small { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 48px; }
+
+@media (max-width: 860px) {
+  .stage, .section-head, .role { grid-template-columns: minmax(0, 1fr); }
+  h2 { max-width: 18ch; }
+  .stage-note { max-width: 52ch; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .sub { font-size: 16.5px; }
+  .links { margin-left: 0; }
+}
+@media print {
+  .strip, .actions, .skip { display: none; }
+  body { background: #fff; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="wrap hero">
+  <p class="kicker"><b>Product designer</b> · Tehran, working remotely</p>
+  <h1>Bahar<br>Javadnia</h1>
+  <p class="thesis">I design product features, build them with Claude Code and <em>stay on them until they work</em> for the people using them.</p>
+  <p class="sub">At Treescribe I own the design of an AI chat that drafts legal agreements, from the first user problem to the code in production and the numbers after launch.</p>
+  <div class="actions">
+    <a class="btn primary" href="mailto:baharjvvd@gmail.com">Email me</a>
+    <a class="btn" href="cv.pdf" download>Download CV</a>
+    <span class="links">
+      <a href="https://www.linkedin.com/in/baharjavadniauix" rel="me">LinkedIn</a>
+      <a href="https://github.com/baharjavadnia" rel="me">GitHub</a>
+      <a href="https://www.behance.net/baharjavadniauix" rel="me">Behance</a>
+      <a href="https://dribbble.com/baharjavadnia" rel="me">Dribbble</a>
+    </span>
+  </div>
+  <p class="ledger" aria-label="At Treescribe since June 2026">
+    <span>Treescribe, since Jun 2026</span>
+    <span><b>50</b> pull requests merged</span>
+    <span><b>8</b> Claude Code skills written for the team</span>
+    <span><b>1</b> interface style guide owned</span>
+  </p>
+</header>
+
+<nav class="strip" aria-label="How I work, stage by stage">
+  <ol>
+    <li data-for="understand"><a href="#understand"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Understand</span></a></li>
+    <li data-for="design"><a href="#design"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Design</span></a></li>
+    <li data-for="build"><a href="#build"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Build and ship</span></a></li>
+    <li data-for="test"><a href="#test"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Test and measure</span></a></li>
+    <li data-for="system"><a href="#system"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Design system</span></a></li>
+    <li data-for="automate"><a href="#automate"><span class="mark" aria-hidden="true"><i></i><svg viewBox="0 0 10 10"><path d="M2 5.2l2 2 4-4.4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="label">Automate</span></a></li>
+  </ol>
+</nav>
+
+<main id="main">
+<div class="wrap stages">
+
+  <section class="stage" id="understand" data-stage>
+    <div>
+      <p class="eyebrow">Understand</p>
+      <h2>Frame the problem before drawing it.</h2>
+      <p class="stage-note">Every piece of work starts with an agreed problem statement and the checks that will say it worked.</p>
+    </div>
+    <ul class="evidence">
+      <li><strong>Onboarding, scoped for launch.</strong> I framed it as one helpful, efficient path from sign-up to a finished first document, then cut it into shippable tasks, each written in the product's words with screenshots so any engineer could pick one up.</li>
+      <li><strong>Ideas ranked by outcome.</strong> I wrote a product-loop skill that turns any area into ten improvement candidates, each written as input, output, outcome and impact. Its first run put onboarding measurement at the top, and that became the next piece of work.</li>
+      <li><strong>Measures set before the build.</strong> Before launch I agreed the funnel steps with the team, so we could see where new users stop instead of guessing.</li>
+    </ul>
+  </section>
+
+  <section class="stage" id="design" data-stage>
+    <div>
+      <p class="eyebrow">Design</p>
+      <h2>Audit, redesign, then sweat the last pixel.</h2>
+      <p class="stage-note">The strip at the top of this page borrows a pattern I designed and shipped for the Treescribe chat.</p>
+    </div>
+    <ul class="evidence">
+      <li><strong>The AI chat, audited for first-time users.</strong> I captured every screen of a full journey at desktop and phone width and logged 24 findings on 15 screens, 4 of them critical, each with a severity and a proposed fix.
+        <span class="meta">Hierarchy · spacing · visual noise · plain language</span></li>
+      <li><strong>One system for the chat.</strong> The redesign gave it one heading scale, one spacing rhythm and a distinct look for tasks, questions, cards and results. A sticky strip now shows a document's seven stages, and finished stages fold into it.</li>
+      <li><strong>Iterated in versions, not in place.</strong> Onboarding went through nine design versions, the phone layouts through three and the simulation flow through four. Each was prototyped in Claude Design, refined in Figma and released as a versioned export the engineers and agents build from.</li>
+    </ul>
+  </section>
+
+  <section class="stage" id="build" data-stage>
+    <div>
+      <p class="eyebrow">Build and ship</p>
+      <h2>I ship it myself, to the team's standard.</h2>
+      <p class="stage-note">TypeScript monorepo: Next.js, React, NestJS and MongoDB, with Claude Code and Codex.</p>
+    </div>
+    <ul class="evidence">
+      <li><strong>50 pull requests merged since June 2026.</strong> Each went through code review and CI before it reached production, and I fix what review finds on the same branch.</li>
+      <li><strong>Full-stack when the design needs it.</strong> Information cards in the AI chat took a new message element end to end: the schema, the prompt that makes the model use it, and the expandable card that renders it.</li>
+      <li><strong>The marketing site.</strong> I designed it through fourteen prototype rounds that fed the team's build spec, then shipped its legal pages, re-recorded the product clips, made it readable by AI agents and added the share image.</li>
+      <li><strong>The details people feel.</strong> Sign-in transitions and loading states, the chat at phone width, and suggested answers on a neutral chip instead of a pre-selected one.</li>
+      <li><strong>Words are part of the build.</strong> I wrote the microcopy and voice rules across the interface, the API and the AI's own prompts, so the screens and the model speak with one voice.</li>
+    </ul>
+  </section>
+
+  <section class="stage" id="test" data-stage>
+    <div>
+      <p class="eyebrow">Test and measure</p>
+      <h2>Turn ideas into checks, then read the numbers.</h2>
+      <p class="stage-note">I stay on a feature after it ships, until the evidence says it does its job.</p>
+    </div>
+    <ul class="evidence">
+      <li><strong>An onboarding funnel the team can read.</strong> I built it into the admin app: six steps from sign-up to a signed agreement, cohorts by date range and the median time to a first document, with internal accounts left out. I added the timestamps the data model was missing so the counts hold up.</li>
+      <li><strong>Marketing analytics, tested before anyone relied on it.</strong> I work in GA4, Google Tag Manager and Microsoft Clarity and publish my own Tag Manager events. I tested the analytics playbook step by step on staging, fixed what the test found, kept staff visits out of the numbers and presented the first dashboard to the team.</li>
+      <li><strong>The AI's behaviour, pinned by tests.</strong> I wrote chat test cases, signed off the expected behaviour for the end-to-end suite, and ran a question trial across seven invented client businesses, from a sole trader to a large firm.</li>
+    </ul>
+  </section>
+
+  <section class="stage" id="system" data-stage>
+    <div>
+      <p class="eyebrow">Design system</p>
+      <h2>Repeated patterns become rules everyone builds from.</h2>
+    </div>
+    <ul class="evidence">
+      <li><strong>The operative document style guide.</strong> I wrote the canon for the product's document view: colours, type, marks, states and every surface, with tokens checked against Figma. Any change to it needs my approval.
+        <div class="tokens" aria-hidden="true">
+          <span style="--c: var(--ink)">ink</span>
+          <span style="--c: var(--iris)">accent</span>
+          <span style="--c: var(--done)">status / done</span>
+          <span style="--c: var(--hair-strong)">rule</span>
+        </div>
+      </li>
+      <li><strong>Semantic tokens over raw colours.</strong> I moved the status badges onto semantic status tokens and hold colour choices to WCAG AA contrast.</li>
+      <li><strong>A brand to build on.</strong> I designed the Treescribe mark, set the wordmark rules and wrote a nine-chapter brand book.</li>
+      <li><strong>A voice the AI follows.</strong> Sentence case everywhere, plain words instead of system terms, and one vocabulary for every state a task can be in.</li>
+    </ul>
+  </section>
+
+  <section class="stage" id="automate" data-stage>
+    <div>
+      <p class="eyebrow">Automate</p>
+      <h2>If I do it twice, an agent does it the third time.</h2>
+      <p class="stage-note">I work in five parallel workspaces, each with its own coding agent.</p>
+    </div>
+    <ul class="evidence">
+      <li><strong>Eight Claude Code skills the whole team loads.</strong>
+        <ul class="skills">
+          <li><span class="chips"><code>design-translate</code></span> Retells a diff or a pull request as the user moments it changes, so reviews talk about people, not functions.</li>
+          <li><span class="chips"><code>inspect-design</code> <code>work-save-design</code> <code>edit-design</code></span> Move a design from a Claude Design canvas into Figma and out as versioned exports that agents read before they build.</li>
+          <li><span class="chips"><code>work-propose</code></span> The product loop: ten candidates in input, output, outcome and impact, ranked.</li>
+          <li><span class="chips"><code>work-comments</code> <code>work-context</code> <code>edit-exposure</code></span> The team's comment voice, a clean handover between agent sessions, and a switch that puts a dev instance on a public address.</li>
+        </ul>
+      </li>
+      <li><strong>Agents in my pocket.</strong> I built a private Telegram bridge to read, answer and voice-message my coding agents from my phone.</li>
+      <li><strong>My own timesheet, rebuilt.</strong> A skill reconstructs my day from commits and agent sessions and writes the line for my work log.</li>
+    </ul>
+  </section>
+
+</div>
+
+<section class="section" aria-labelledby="log-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Ship log</p>
+        <h2 id="log-title">Small changes, written from the user's side.</h2>
+      </div>
+      <p>A few of my commit messages from the last four months, lightly trimmed. I describe a change as what people will see.</p>
+    </div>
+    <ol class="log">
+      <li><time datetime="2026-08-06">06 Aug</time><span>Stage titles: sentence case at the call sites, not just in the rule.</span><span class="area">copy</span></li>
+      <li><time datetime="2026-09-02">02 Sep</time><span>Air between the question text and its cards.</span><span class="area">chat</span></li>
+      <li><time datetime="2026-09-02">02 Sep</time><span>Row and expand control hover as one action.</span><span class="area">cards</span></li>
+      <li><time datetime="2026-09-08">08 Sep</time><span>“· Change” stays on the same line as the email address.</span><span class="area">sign-in</span></li>
+      <li><time datetime="2026-09-08">08 Sep</time><span>The “We sent a code to” line never wraps.</span><span class="area">sign-in</span></li>
+      <li><time datetime="2026-10-15">15 Oct</time><span>A one-line answer keeps what the user typed: no commas added to a postcode or a year.</span><span class="area">chat</span></li>
+      <li><time datetime="2026-10-16">16 Oct</time><span>A pill the finished row cannot keep leaves at once instead of shrinking away.</span><span class="area">motion</span></li>
+      <li><time datetime="2026-10-25">25 Oct</time><span>A document's seven stages as a sticky progress strip over the feed.</span><span class="area">progress</span></li>
+      <li><time datetime="2026-10-26">26 Oct</time><span>A stage that never ran reads Not needed, not Skipped.</span><span class="area">progress</span></li>
+      <li><time datetime="2026-11-02">02 Nov</time><span>Staff are marked as internal traffic from the first page, before Tag Manager loads.</span><span class="area">analytics</span></li>
+      <li><time datetime="2026-11-04">04 Nov</time><span>Suggested answers get a neutral chip and are never pre-selected.</span><span class="area">chat</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Experience</p>
+        <h2 id="exp-title">Where I've worked.</h2>
+      </div>
+    </div>
+    <div class="roles">
+      <article class="role">
+        <div><h3>Treescribe</h3><p class="when">Product Designer · Jun 2026 to now · Remote</p></div>
+        <div><p>An AI product by Query Law that drafts legal agreements through a guided chat. I own the design of the chat, onboarding and the document view, and build and ship my own changes with Claude Code.</p></div>
+      </article>
+      <article class="role">
+        <div><h3>Kara Digital Marketing</h3><p class="when">UI/UX Designer · Sep 2024 to Mar 2025</p></div>
+        <div>
+          <p>Responsive redesigns for several client websites, from wireframes to high-fidelity prototypes in Figma.</p>
+          <ul>
+            <li>Ran cross-functional workshops to agree problem framing, KPIs and UX scope.</li>
+            <li>Documented flows, edge states and acceptance criteria for engineering.</li>
+            <li>Built componentised UI with tokens, variants and Dev Mode specs.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="role">
+        <div><h3>Bazimoon</h3><p class="when">Content Manager and Graphic Designer · Sep 2023 to Feb 2024</p></div>
+        <div><p>Planned and produced social content end to end: photography, video, posters and catalogues, on a content calendar I set up.</p></div>
+      </article>
+      <article class="role">
+        <div><h3>Safir Digital Marketing</h3><p class="when">Graphic Designer · Mar 2023 to Apr 2023</p></div>
+        <div><p>Campaign visuals, posts and stories, kept consistent with each client's brand.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="earlier-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Earlier work</p>
+        <h2 id="earlier-title">Case studies from before Treescribe.</h2>
+      </div>
+    </div>
+    <ul class="projects">
+      <li><a href="https://baharjavadnia.framer.website/ilearn-website-for-elearning-commerce"><span class="type">E-commerce · design system</span><b>iLearn</b><span class="d">A tech-course store with a tokenised design system and a simpler path from discovery to checkout.</span></a></li>
+      <li><a href="https://baharjavadnia.framer.website/unimind-website"><span class="type">UX case study</span><b>UniMind</b><span class="d">A student mental-health app: research, personas, journeys and an accessible, RTL-ready interface.</span></a></li>
+      <li><a href="https://baharjavadnia.framer.website/flowpay-fintech-website"><span class="type">Web design</span><b>FlowPay</b><span class="d">A fintech website.</span></a></li>
+      <li><a href="https://baharjavadnia.framer.website/savely-fintech-app"><span class="type">App design</span><b>Savely</b><span class="d">A fintech app concept.</span></a></li>
+      <li><a href="https://baharjavadnia.framer.website/tripo-travel-planner-app"><span class="type">App design</span><b>Tripo</b><span class="d">A travel planner app.</span></a></li>
+      <li><a href="https://baharjavadnia.framer.website/aurex-wireless-headphone-landing"><span class="type">Web design</span><b>AUREX</b><span class="d">A landing page for wireless headphones.</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="facts-title">
+  <div class="wrap">
+    <h2 id="facts-title" class="eyebrow facts-title">Tools, education and languages</h2>
+    <div class="facts">
+      <div><h3>Design</h3><p>Claude Design, Figma, FigJam, Framer, Illustrator, Photoshop, After Effects</p></div>
+      <div><h3>Build</h3><p>Claude Code, Codex, TypeScript, React, Next.js, Tailwind CSS, HTML, CSS, Git and GitHub</p></div>
+      <div><h3>Data and research</h3><p>GA4, Google Tag Manager, Microsoft Clarity, MongoDB queries, Maze, UXTweak, Optimal Workshop</p></div>
+      <div><h3>Education</h3><ul><li>B.Sc. Multimedia, Kharazmi University, Tehran</li><li class="muted">UX Design and UI Design certificates, Melina Design School, 2025</li></ul></div>
+      <div><h3>Languages</h3><ul><li>English, advanced: my working language</li><li>Persian, native</li><li class="muted">Turkish, upper-intermediate · Italian, pre-intermediate</li></ul></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Let's talk about your product.</h2>
+    <div class="actions">
+      <a class="btn primary" href="mailto:baharjvvd@gmail.com">baharjvvd@gmail.com</a>
+      <span class="links">
+        <a href="https://www.linkedin.com/in/baharjavadniauix">LinkedIn</a>
+        <a href="https://t.me/baharjvvd">Telegram</a>
+        <a href="https://github.com/baharjavadnia">GitHub</a>
+      </span>
+    </div>
+    <p class="small">Plain HTML and CSS, designed and built with Claude Code. No template.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var sections = Array.prototype.slice.call(document.querySelectorAll('[data-stage]'));
+  var items = {};
+  document.querySelectorAll('.strip li').forEach(function (li) { items[li.getAttribute('data-for')] = li; });
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var line = window.innerHeight * 0.4;
+    var current = -1;
+    sections.forEach(function (s, i) { if (s.getBoundingClientRect().top <= line) current = i; });
+    var last = sections[sections.length - 1].getBoundingClientRect();
+    var pastAll = last.bottom <= line;
+    sections.forEach(function (s, i) {
+      var li = items[s.id];
+      var done = pastAll ? true : i < current;
+      var isCurrent = !pastAll && i === current;
+      li.classList.toggle('is-done', done);
+      li.classList.toggle('is-current', isCurrent);
+      var a = li.querySelector('a');
+      if (isCurrent) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current');
+    });
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+</body>
+</html>
