@@ -200,12 +200,28 @@ dialog.case::backdrop { background: rgba(14,12,30,.5); -webkit-backdrop-filter: 
 .about { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
 @media (max-width: 860px) { .about { grid-template-columns: minmax(0, 1fr); } }
 .portrait { position: relative; max-width: 460px; }
-.avatar { display: block; }
-.stage { display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 1; border-radius: 30px; overflow: hidden;
-  background: radial-gradient(circle at 30% 22%, #F6F3FF 0%, #E4DEFC 55%, #D3CBF8 100%); }
+.avatar { display: block; perspective: 1000px; }
+.stage { position: relative; display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 1; border-radius: 30px; overflow: hidden;
+  background: radial-gradient(circle at 30% 22%, #F6F3FF 0%, #E4DEFC 55%, #D3CBF8 100%); box-shadow: var(--shadow);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1); will-change: transform; }
 :root[data-theme="dark"] .stage { background: radial-gradient(circle at 30% 22%, #34306A 0%, #24214A 60%, #1B1938 100%); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stage { background: radial-gradient(circle at 30% 22%, #34306A 0%, #24214A 60%, #1B1938 100%); } }
-.stage img { width: 88%; display: block; margin-bottom: -7%; }
+.avatar.tilting .stage, .avatar.tilting .person, .avatar.tilting .depth { transition-duration: .12s; }
+.stage .person { position: relative; z-index: 2; width: 94%; display: block; margin-bottom: -1%;
+  translate: calc(var(--px, 0) * -7px) calc(var(--py, 0) * -5px); transition: translate .6s cubic-bezier(.2,.8,.2,1); }
+.stage .depth { position: absolute; z-index: 1; width: var(--w); rotate: var(--r); filter: drop-shadow(0 10px 12px rgba(25,23,43,.16));
+  translate: calc(var(--px, 0) * var(--k)) calc(var(--py, 0) * var(--k)); transition: translate .6s cubic-bezier(.2,.8,.2,1);
+  animation: drift 7s ease-in-out infinite alternate; animation-delay: var(--dl); }
+.d1 { left: 8%; top: 9%; --w: 56px; --k: 18px; --r: -14deg; --dl: 0s; }
+.d2 { right: 10%; top: 12%; --w: 40px; --k: 28px; --r: 0deg; --dl: -2.5s; }
+.d3 { right: 7%; top: 46%; --w: 54px; --k: 14px; --r: 18deg; --dl: -5s; }
+@keyframes drift { from { transform: translateY(-5px); } to { transform: translateY(6px); } }
+.sheen { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .4s ease;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.38), rgba(255,255,255,0) 46%); }
+.avatar:hover .sheen { opacity: 1; }
+.credit { margin: 12px 0 0; text-align: center; font-size: 12px; color: var(--muted); }
+.credit a { color: inherit; }
+@media (prefers-reduced-motion: reduce) { .stage, .stage .person, .stage .depth { transition: none; animation: none; } }
 .story p { font-size: clamp(17px, 1.6vw, 19px); margin: 0 0 16px; max-width: 36em; }
 .story p.muted { color: var(--muted); }
 .quick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
@@ -388,8 +404,14 @@ footer .brand { margin: 0; color: var(--ink); }
   <section class="block" id="about">
     <div class="wrap about">
       <div class="portrait reveal">
-        <div class="avatar"><span class="stage"><img src="assets/character.svg" alt="Illustrated portrait of Bahar"></span></div>
-        <!-- Character: "Lorelei" by Lisa Wischofsky, CC0 1.0, generated with DiceBear. -->
+        <div class="avatar" id="avatar">
+          <span class="stage">
+            <img class="depth d1" src="assets/shapes/s15.png" alt=""><img class="depth d2" src="assets/shapes/s12.png" alt=""><img class="depth d3" src="assets/shapes/s3.png" alt="">
+            <img class="person" src="assets/character.svg" alt="Illustrated portrait of Bahar">
+            <span class="sheen" aria-hidden="true"></span>
+          </span>
+        </div>
+        <p class="credit">Illustration based on <a href="https://www.dicebear.com/styles/micah/">Micah</a> by Micah Lanier, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
       </div>
       <div class="story reveal">
         <p class="eyebrow">About me</p>
@@ -601,6 +623,23 @@ footer .brand { margin: 0; color: var(--ink); }
       if (n) { var nt = tabs[(i + n + tabs.length) % tabs.length]; select(nt); nt.focus(); e.preventDefault(); }
     });
   });
+
+  /* About: the portrait frame tilts toward the cursor, with layers at different depths */
+  var av = document.getElementById('avatar');
+  if (av && !reduce && window.matchMedia('(hover: hover)').matches) {
+    av.addEventListener('pointermove', function (e) {
+      var r = av.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      av.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg'); av.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
+      av.style.setProperty('--px', (x * 2).toFixed(3)); av.style.setProperty('--py', (y * 2).toFixed(3));
+      av.style.setProperty('--mx', ((x + 0.5) * 100).toFixed(1) + '%'); av.style.setProperty('--my', ((y + 0.5) * 100).toFixed(1) + '%');
+      av.classList.add('tilting');
+    });
+    av.addEventListener('pointerleave', function () {
+      av.classList.remove('tilting');
+      ['--rx', '--ry'].forEach(function (k) { av.style.setProperty(k, '0deg'); });
+      ['--px', '--py'].forEach(function (k) { av.style.setProperty(k, '0'); });
+    });
+  }
 
   /* Copy email */
   var copy = document.getElementById('copy');

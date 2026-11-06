@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character options</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root { --paper: #F6F5FB; --ink: #19172B; --muted: #67647F; --accent: #5B4CDB; color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.5 "Inter", system-ui, sans-serif; }
+main { max-width: 1100px; margin: 0 auto; padding: 40px 16px 64px; }
+h1 { font-size: 28px; margin: 0 0 6px; letter-spacing: -0.02em; }
+p.lede { color: var(--muted); margin: 0 0 28px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+figure { margin: 0; }
+.frame { aspect-ratio: 1; border-radius: 24px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;
+  background: radial-gradient(circle at 30% 22%, #F6F3FF 0%, #E4DEFC 55%, #D3CBF8 100%); }
+.frame img { width: 92%; display: block; }
+.on { outline: 2px solid var(--accent); outline-offset: 4px; }
+figcaption { margin-top: 10px; display: flex; justify-content: space-between; gap: 8px; }
+figcaption b { font-weight: 600; } figcaption span { color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Character options</h1>
+  <p class="lede">Number 1 is on the site now. Tell me a number to switch. All six are free to use on a portfolio.</p>
+  <div class="grid">
+    <figure><div class="frame on"><img src="option-1.svg" alt="Option 1"></div><figcaption><b>1 · Micah</b><span>live now · CC BY 4.0</span></figcaption></figure>
+    <figure><div class="frame"><img src="option-2.svg" alt="Option 2"></div><figcaption><b>2 · Avataaars, wavy</b><span>free to use</span></figcaption></figure>
+    <figure><div class="frame"><img src="option-3.svg" alt="Option 3"></div><figcaption><b>3 · Avataaars, curly</b><span>free to use</span></figcaption></figure>
+    <figure><div class="frame"><img src="option-4.svg" alt="Option 4"></div><figcaption><b>4 · Notion style</b><span>CC0</span></figcaption></figure>
+    <figure><div class="frame"><img src="option-5.svg" alt="Option 5"></div><figcaption><b>5 · Personas</b><span>CC BY 4.0</span></figcaption></figure>
+    <figure><div class="frame"><img src="option-6.svg" alt="Option 6"></div><figcaption><b>6 · Lorelei</b><span>previous · CC0</span></figcaption></figure>
+  </div>
+</main>
+</body>
+</html>
