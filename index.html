@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bahar Javadnia, Product Designer</title>
-<meta name="description" content="Product designer who designs product features, then builds and ships them with Claude Code. Designing Treescribe since December 2025.">
+<meta name="description" content="Product designer for AI products: interfaces, agent behaviour, decision flows and design systems.">
 <meta property="og:title" content="Bahar Javadnia, Product Designer">
-<meta property="og:description" content="I design product features, then build and ship them with Claude Code.">
+<meta property="og:description" content="I design AI products: the screens people use, and the way agents behave behind them.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://baharjavadnia.github.io/">
 <meta property="og:image" content="https://baharjavadnia.github.io/assets/og.png">
@@ -258,8 +258,8 @@ h1 {
 .contact { margin-top: clamp(56px, 9vh, 96px); text-align: left; }
 .contact .big {
   display: inline-block; font-family: var(--display); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05;
-  font-size: clamp(30px, 6.4vw, 84px); text-decoration: none; border: 1.5px solid transparent; padding: 0 0.08em;
-  overflow-wrap: anywhere; position: relative;
+  font-size: clamp(19px, 6vw, 84px); text-decoration: none; border: 1.5px solid transparent; padding: 0 0.08em;
+  white-space: nowrap; max-width: 100%; position: relative;
 }
 .contact .big:hover, .contact .big:focus-visible { border-color: var(--sel); color: var(--ink); outline: none; }
 .contact .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
@@ -293,6 +293,33 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chips span { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--sel-soft); color: var(--ink); }
 .insp-body code { font-family: var(--mono); font-size: 12.5px; background: var(--sel-soft); padding: 1px 5px; border-radius: 4px; }
+
+/* Featured frame spans two columns and two rows */
+.frames { grid-auto-flow: dense; }
+.frame.feature { grid-column: span 2; grid-row: span 2; }
+.frame.feature .frame-body { flex: 1; aspect-ratio: auto; min-height: 320px; }
+@media (max-width: 1100px) { .frame.feature { grid-row: auto; } .frame.feature .frame-body { flex: none; aspect-ratio: 16 / 10; min-height: 0; } }
+@media (max-width: 600px) { .frame.feature { grid-column: auto; } .frame.feature .frame-body { aspect-ratio: 4 / 4.4; } }
+
+/* Decision tree visual */
+.v-tree { padding: 6% 6.5%; gap: 0; font-size: clamp(11.5px, 1.05vw, 15px); justify-content: center; }
+.v-tree .t-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+.v-tree .t-topic { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.v-tree .t-badge { font-size: 11px; font-weight: 500; color: var(--sel); background: var(--sel-soft); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.v-tree .t-title { font-family: var(--display); font-weight: 600; font-size: clamp(16px, 1.6vw, 22px); letter-spacing: -0.015em; margin-bottom: 14px; line-height: 1.2; }
+.v-tree .node { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; position: relative; }
+.v-tree .node + .node { margin-top: 2px; }
+.v-tree .node .pm { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); font-size: 12px; line-height: 1; }
+.v-tree .node .q { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.v-tree .node .a { color: var(--muted); white-space: nowrap; font-size: .92em; }
+.v-tree .node.sel { background: var(--sel-soft); }
+.v-tree .node.sel .a { color: var(--sel); font-weight: 500; }
+.v-tree .node.open .pm { border-color: var(--sel); color: var(--sel); }
+.v-tree .kids { margin-left: 18px; padding-left: 18px; border-left: 1.5px solid var(--line); }
+.v-tree .node.none .a { font-style: italic; color: #B4462F; }
+.v-tree .node.none .pm { border-style: dashed; }
+:root[data-theme="dark"] .v-tree .node.none .a { color: #F08A6E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .v-tree .node.none .a { color: #F08A6E; } }
 </style>
 </head>
 <body>
@@ -303,12 +330,12 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
     <b>Bahar Javadnia</b><span>/ Portfolio</span>
   </div>
   <div class="spacer"></div>
-  <div class="avatars" aria-label="On this canvas: Bahar and Claude">
+  <div class="avatars" aria-label="On this canvas: Bahar and an AI agent">
     <i style="background: var(--sel)" title="Bahar">B</i>
-    <i style="background: var(--claude)" title="Claude">C</i>
+    <i style="background: var(--claude)" title="Agent">A</i>
   </div>
   <a class="btn cv" href="cv.pdf" download>Download CV</a>
-  <a class="btn primary" href="mailto:baharjvvd@gmail.com">Contact</a>
+  <a class="btn primary" href="mailto:baharjavadniauix@gmail.com">Contact</a>
 </header>
 
 <main>
@@ -321,26 +348,46 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
       <span class="cursor me" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 1.5l13 7.4-5.6 1.4L6.8 16z"/></svg><b>Bahar</b></span>
     </div>
     <p class="thesis">
-      <span class="sr">I design product features, then build and ship them with Claude Code.</span>
-      <span class="typed" aria-hidden="true">I design product features, then build and ship them with Claude Code.</span><span class="caret" aria-hidden="true"></span><span class="cursor claude" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 1.5l13 7.4-5.6 1.4L6.8 16z"/></svg><b>Claude</b></span>
+      <span class="sr">I design AI products: the screens people use, and the way agents behave behind them.</span>
+      <span class="typed" aria-hidden="true">I design AI products: the screens people use, and the way agents behave behind them.</span><span class="caret" aria-hidden="true"></span><span class="cursor claude" aria-hidden="true"><svg viewBox="0 0 18 18"><path d="M2 1.5l13 7.4-5.6 1.4L6.8 16z"/></svg><b>Agent</b></span>
     </p>
     <ul class="facts-row">
-      <li><b>Treescribe</b> since Dec 2025</li>
-      <li><b>50</b> pull requests merged</li>
-      <li><b>8</b> agent skills</li>
+      <li>AI interfaces</li>
+      <li>Agent behaviour</li>
+      <li>Design systems</li>
       <li>Tehran · remote</li>
     </ul>
   </section>
 
   <section class="group" aria-labelledby="work-title">
     <div class="group-head">
-      <h2 id="work-title">Treescribe</h2>
-      <p>AI that drafts legal agreements through a guided chat. I design it and ship it. <a href="https://treescribe.com">treescribe.com ↗</a></p>
+      <h2 id="work-title">Selected work</h2>
+      <p>Most of it from Treescribe, an AI product that drafts legal agreements. Open a frame for the story.</p>
     </div>
     <div class="frames">
+      <article class="frame feature">
+        <p class="frame-name">Decision trees</p>
+        <button class="frame-body" data-open="tree" aria-haspopup="dialog" aria-label="Open the decision-tree interface">
+          <span class="viz v-tree" aria-hidden="true">
+            <span class="t-head"><span class="t-topic">Topic 10 · Termination</span><span class="t-badge">3 of 5 answered</span></span>
+            <span class="t-title">Are termination rights applicable in this agreement?</span>
+            <span class="node open sel"><span class="pm">−</span><span class="q">Breach termination right</span><span class="a">All parties</span></span>
+            <span class="kids">
+              <span class="node"><span class="pm">·</span><span class="q">Breach notice period</span><span class="a">14 days</span></span>
+              <span class="node none"><span class="pm">?</span><span class="q">Obligation suspension</span><span class="a">No answer yet</span></span>
+              <span class="node"><span class="pm">·</span><span class="q">Termination consequences</span><span class="a">Pro rata</span></span>
+            </span>
+            <span class="node"><span class="pm">+</span><span class="q">Termination for insolvency</span><span class="a">All parties</span></span>
+            <span class="node"><span class="pm">+</span><span class="q">Termination for convenience</span><span class="a">Not applicable</span></span>
+          </span>
+          <span class="open-hint">Open</span>
+        </button>
+        <p class="frame-cap"><b>Hundreds of linked decisions, one readable tree.</b> <span>Information architecture, states, specs.</span></p>
+      </article>
+
       <article class="frame">
-        <p class="frame-name">AI chat redesign</p>
-        <button class="frame-body" data-open="chat" aria-haspopup="dialog" aria-label="Open the AI chat redesign">
+        <p class="frame-name">AI chat and agent behaviour</p>
+        <button class="frame-body" data-open="chat" aria-haspopup="dialog" aria-label="Open the AI chat and agent behaviour">
           <span class="viz v-chat" aria-hidden="true">
             <span class="strip"><i class="d"></i><i class="d"></i><i class="d"></i><i class="c"></i><i></i><i></i><i></i></span>
             <span class="q">Who owns the work the consultant creates?<span>Pick one. You can change it later.</span></span>
@@ -348,24 +395,24 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
           </span>
           <span class="open-hint">Open</span>
         </button>
-        <p class="frame-cap"><b>24 findings, then shipped.</b> <span>Audit, redesign, React.</span></p>
+        <p class="frame-cap"><b>An agent people can follow.</b> <span>Conversation, QA.</span></p>
       </article>
 
       <article class="frame">
-        <p class="frame-name">Onboarding funnel</p>
-        <button class="frame-body" data-open="funnel" aria-haspopup="dialog" aria-label="Open the onboarding funnel">
-          <span class="viz v-funnel" aria-hidden="true">
-            <span class="row"><span>Signed up</span><i style="--w:100%"></i></span>
-            <span class="row"><span>Verified</span><i style="--w:84%; --o:.9"></i></span>
-            <span class="row"><span>First document</span><i style="--w:62%; --o:.8"></i></span>
-            <span class="row"><span>Version kept</span><i style="--w:45%; --o:.7"></i></span>
-            <span class="row"><span>Sent to sign</span><i style="--w:31%; --o:.6"></i></span>
-            <span class="row"><span>Signed</span><i style="--w:22%; --o:.5"></i></span>
-            <small>Illustrative bars</small>
+        <p class="frame-name">Agentic workflow</p>
+        <button class="frame-body" data-open="agents" aria-haspopup="dialog" aria-label="Open the agentic workflow">
+          <span class="viz v-term" aria-hidden="true">
+            <p><span class="p">❯</span> /design-translate pr 1189</p>
+            <p class="o">  the user moments it changes</p>
+            <p><span class="p">❯</span> /work-save-design onboarding</p>
+            <p class="o">  <span class="ok">✓</span> versioned export saved</p>
+            <p><span class="p">❯</span> /work-propose chat</p>
+            <p class="o">  ten candidates, ranked</p>
+            <span class="tmux"><i>A</i><i class="on">B</i><i>C</i><i>D</i><i>E</i></span>
           </span>
           <span class="open-hint">Open</span>
         </button>
-        <p class="frame-cap"><b>Six steps, one view.</b> <span>Framing, data, analytics.</span></p>
+        <p class="frame-cap"><b>Agents in the design loop.</b> <span>Workflows, automation.</span></p>
       </article>
 
       <article class="frame">
@@ -385,20 +432,20 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
       </article>
 
       <article class="frame">
-        <p class="frame-name">Agentic workflow</p>
-        <button class="frame-body" data-open="agents" aria-haspopup="dialog" aria-label="Open the agentic workflow">
-          <span class="viz v-term" aria-hidden="true">
-            <p><span class="p">❯</span> /design-translate pr 1189</p>
-            <p class="o">  the user moments it changes</p>
-            <p><span class="p">❯</span> /work-save-design onboarding</p>
-            <p class="o">  <span class="ok">✓</span> versioned export saved</p>
-            <p><span class="p">❯</span> /work-propose chat</p>
-            <p class="o">  ten candidates, ranked</p>
-            <span class="tmux"><i>A</i><i class="on">B</i><i>C</i><i>D</i><i>E</i></span>
+        <p class="frame-name">Onboarding</p>
+        <button class="frame-body" data-open="funnel" aria-haspopup="dialog" aria-label="Open onboarding">
+          <span class="viz v-funnel" aria-hidden="true">
+            <span class="row"><span>Signed up</span><i style="--w:100%"></i></span>
+            <span class="row"><span>Verified</span><i style="--w:84%; --o:.9"></i></span>
+            <span class="row"><span>First document</span><i style="--w:62%; --o:.8"></i></span>
+            <span class="row"><span>Version kept</span><i style="--w:45%; --o:.7"></i></span>
+            <span class="row"><span>Sent to sign</span><i style="--w:31%; --o:.6"></i></span>
+            <span class="row"><span>Signed</span><i style="--w:22%; --o:.5"></i></span>
+            <small>Illustrative bars</small>
           </span>
           <span class="open-hint">Open</span>
         </button>
-        <p class="frame-cap"><b>8 skills, 5 agents.</b> <span>Claude Code, Codex.</span></p>
+        <p class="frame-cap"><b>Sign-up to signed, measured.</b> <span>Flows, data.</span></p>
       </article>
     </div>
   </section>
@@ -431,83 +478,93 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
     <div class="panel">
       <h3>Details</h3>
       <dl class="props">
-        <dt>Tools</dt><dd>Claude Design, Claude Code, Figma, Codex, React, Next.js, GA4</dd>
+        <dt>Tools</dt><dd>Figma, Claude Design, AI coding agents, React, Next.js, GA4, Maze</dd>
         <dt>Languages</dt><dd>English, advanced · Persian, native · Turkish · Italian</dd>
         <dt>Education</dt><dd>B.Sc. Multimedia, Kharazmi University</dd>
-        <dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/baharjavadniauix">LinkedIn</a> · <a href="https://github.com/baharjavadnia">GitHub</a> · <a href="https://www.behance.net/baharjavadniauix">Behance</a> · <a href="https://dribbble.com/baharjavadnia">Dribbble</a></dd>
+        <dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/baharjavadniauix">LinkedIn</a> · <a href="https://www.figma.com/@baharjavadniauxd">Figma</a> · <a href="https://www.behance.net/baharjavadniauix">Behance</a> · <a href="https://dribbble.com/baharjavadnia">Dribbble</a> · <a href="https://github.com/baharjavadnia">GitHub</a></dd>
       </dl>
     </div>
   </section>
 
   <section class="contact" aria-label="Contact">
     <p class="layer-tag">Say hello</p>
-    <a class="big" href="mailto:baharjvvd@gmail.com">baharjvvd@gmail.com</a>
+    <a class="big" href="mailto:baharjavadniauix@gmail.com">baharjavadniauix@gmail.com</a>
     <div class="links">
       <a class="btn" href="cv.pdf" download>Download CV</a>
       <a class="btn" href="https://t.me/baharjvvd">Telegram</a>
       <a class="btn" href="https://www.linkedin.com/in/baharjavadniauix">LinkedIn</a>
     </div>
-    <p class="foot">Designed and built by me with Claude Code.</p>
+    <p class="foot">Designed and built by me, with an agent.</p>
   </section>
 </main>
 
 <dialog class="inspector" id="inspector" aria-labelledby="insp-title">
-  <div class="insp-head"><p>Treescribe / <span id="insp-crumb"></span></p><button class="close" type="button" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
+  <div class="insp-head"><p>Selected work / <span id="insp-crumb"></span></p><button class="close" type="button" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
   <div class="insp-body" id="insp-body"></div>
 </dialog>
 
+<template id="t-tree">
+  <h2 id="insp-title">Decision-tree interface</h2>
+  <p class="problem">A legal agreement is hundreds of linked decisions. People need to see which ones matter, answer them, and know what each answer changes.</p>
+  <h3>What I did</h3>
+  <ul>
+    <li>Designed the tree that shows how decisions nest, expand and get answered, from a topic down to each clause.</li>
+    <li>Explored dozens of variants in Figma: accordion against inline tree, node and hover states, icon systems and typefaces.</li>
+    <li>Wrote prototypes and state specs for the control panel across every section of an agreement.</li>
+    <li>Gave unanswered decisions and agreement changes their own clear states.</li>
+  </ul>
+  <div class="chips"><span>Information architecture</span><span>Interaction design</span><span>State specs</span><span>Figma</span></div>
+</template>
 <template id="t-chat">
-  <h2 id="insp-title">AI chat redesign</h2>
-  <p class="problem">First-time users were overloaded. The chat repeated itself, bold text stood in for headings, and tasks, questions and results looked alike.</p>
+  <h2 id="insp-title">AI chat and agent behaviour</h2>
+  <p class="problem">The product works through an AI chat. First-time users were overloaded, and the agent's messages, questions and results looked alike.</p>
   <h3>What I did</h3>
   <ul>
-    <li>Audited 15 screens at desktop and phone width: 24 findings, 4 of them critical.</li>
-    <li>Redesigned around one heading scale, one spacing rhythm and a distinct look for each kind of message.</li>
-    <li>Shipped it myself, in React and in the AI's prompt skills, with a sticky strip for a document's seven stages.</li>
-    <li>Gave suggested answers a neutral chip and stopped pre-selecting them.</li>
+    <li>Designed how the agent behaves: what it asks, when it suggests an answer, how it moves between tasks and how it reports progress.</li>
+    <li>Audited the chat for first-time users: 24 findings on 15 screens. Redesigned it around one heading scale, one spacing rhythm and a distinct look for each kind of message.</li>
+    <li>Wrote the voice rules the agent follows: plain words, sentence case, no system terms.</li>
+    <li>Ran design QA on the built product with annotated captures, and fixed the gaps.</li>
   </ul>
-  <div class="chips"><span>Audit</span><span>Interaction design</span><span>React</span><span>Prompt design</span></div>
-</template>
-<template id="t-funnel">
-  <h2 id="insp-title">Onboarding funnel</h2>
-  <p class="problem">Before launch, nobody could see where new users stopped between sign-up and a signed agreement.</p>
-  <h3>What I did</h3>
-  <ul>
-    <li>Framed onboarding as one path to a finished first document and cut it into shippable tasks.</li>
-    <li>Iterated the design through nine versions in Claude Design and Figma.</li>
-    <li>Built the funnel in the admin app: six steps, date-range cohorts, median time to a first document, internal accounts left out.</li>
-    <li>Tested the GA4 and Tag Manager playbook on staging and presented the first dashboard to the team.</li>
-  </ul>
-  <div class="chips"><span>Product framing</span><span>Data</span><span>Admin UI</span><span>GA4</span></div>
-</template>
-<template id="t-system">
-  <h2 id="insp-title">Design system and brand</h2>
-  <p class="problem">The product needed one source of truth for how documents look, read and change state.</p>
-  <h3>What I did</h3>
-  <ul>
-    <li>Wrote the document view's style guide: colours, type, marks and states, with tokens checked against Figma. Changes to it need my approval.</li>
-    <li>Moved status badges onto semantic tokens and kept colour to WCAG AA.</li>
-    <li>Designed the Leaf Nib mark and a nine-chapter brand book.</li>
-    <li>Wrote the voice rules the interface and the AI both follow.</li>
-  </ul>
-  <div class="chips"><span>Tokens</span><span>Documentation</span><span>Brand</span><span>UX writing</span></div>
+  <div class="chips"><span>Conversation design</span><span>Agent behaviour</span><span>Design QA</span><span>UX writing</span></div>
 </template>
 <template id="t-agents">
-  <h2 id="insp-title">Agentic workflow</h2>
+  <h2 id="insp-title">Agentic design workflow</h2>
   <p class="problem">If I do something twice, an agent does it the third time.</p>
   <h3>What I built</h3>
   <ul>
-    <li><code>design-translate</code> retells a pull request as the user moments it changes.</li>
-    <li>A pipeline that takes a design from a Claude Design canvas to Figma to a versioned export that agents read before they build.</li>
-    <li><code>work-propose</code> turns an area into ten ranked candidates: input, output, outcome, impact.</li>
-    <li>Five parallel workspaces with Claude Code and Codex, and a Telegram bridge to run them from my phone.</li>
+    <li>A workflow where agents carry a design from the canvas to Figma to a versioned export, then build from it.</li>
+    <li>Reusable agent skills for the team: one retells a code change as the user moments it affects, one proposes ranked improvements through a product loop, one writes in the team's voice.</li>
+    <li>Several agents running in parallel, which I can follow and answer from my phone through a chat bridge I built.</li>
   </ul>
-  <div class="chips"><span>Claude Code</span><span>Codex</span><span>8 team skills</span><span>Automation</span></div>
+  <div class="chips"><span>Agent workflows</span><span>Automation</span><span>Design to code</span></div>
+</template>
+<template id="t-system">
+  <h2 id="insp-title">Design system and brand</h2>
+  <p class="problem">The product needed one source of truth for how its screens and documents look, read and change state.</p>
+  <h3>What I did</h3>
+  <ul>
+    <li>Wrote the style guide for the document view: colours, type, marks and states, with tokens checked against Figma. Changes to it need my approval.</li>
+    <li>Designed the product's own components in Figma and kept them in step with the built interface.</li>
+    <li>Moved status badges onto semantic tokens and kept colour to WCAG AA.</li>
+    <li>Designed the brand mark and a nine-chapter brand book.</li>
+  </ul>
+  <div class="chips"><span>Tokens</span><span>Components</span><span>Brand</span><span>Documentation</span></div>
+</template>
+<template id="t-funnel">
+  <h2 id="insp-title">Onboarding, measured</h2>
+  <p class="problem">New users had to get from sign-up to a signed agreement, and nobody could see where they stopped.</p>
+  <h3>What I did</h3>
+  <ul>
+    <li>Designed onboarding through five versions, from the first launch flow to sign-up through a signed agreement.</li>
+    <li>Framed it as one path and cut it into tasks the team could ship one at a time.</li>
+    <li>Built a funnel view for the team: six steps, date-range cohorts and the median time to a first document.</li>
+    <li>Tested the analytics setup step by step and presented the first dashboard to the team.</li>
+  </ul>
+  <div class="chips"><span>Product framing</span><span>Onboarding</span><span>Data</span><span>Analytics</span></div>
 </template>
 
 <script>
 (function () {
-  // Intro: Claude types the line under the name.
   var hero = document.getElementById('hero');
   var typed = hero.querySelector('.typed');
   var full = typed.textContent;
@@ -520,12 +577,12 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
     setTimeout(function step() {
       i++;
       typed.textContent = full.slice(0, i);
-      if (i < full.length) setTimeout(step, full.charAt(i - 1) === ',' ? 160 : 24);
+      var ch = full.charAt(i - 1);
+      if (i < full.length) setTimeout(step, (ch === ',' || ch === ':') ? 160 : 22);
       else { hero.classList.remove('typing'); hero.classList.add('done'); }
     }, 1000);
   }
 
-  // Inspector
   var dlg = document.getElementById('inspector');
   var body = document.getElementById('insp-body');
   var crumb = document.getElementById('insp-crumb');
