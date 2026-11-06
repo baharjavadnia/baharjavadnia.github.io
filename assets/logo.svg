@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <title>Bahar Javadnia</title>
-  <g transform="translate(1.5 1.5)">
-    <g fill="none" stroke="#4A45C4" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M27 54 V22"/><path d="M27 54 H38 A11 11 0 0 0 38 32 H27"/><path d="M27 22 L17 12"/><path d="M27 22 L37 12"/>
-    </g>
-    <circle cx="14" cy="9" r="5" fill="#C9643F"/><circle cx="40" cy="9" r="5" fill="#4A45C4"/>
+  <g transform="translate(-3.5 0)">
+    <path d="M22 6 V44" stroke="#5B4CDB" stroke-width="6.5" stroke-linecap="round"/>
+    <g fill="#5B4CDB"><circle cx="35" cy="34" r="7.5"/><circle cx="45" cy="41" r="7.5"/><circle cx="41" cy="52" r="7.5"/><circle cx="29" cy="52" r="7.5"/><circle cx="25" cy="41" r="7.5"/></g>
+    <circle cx="35" cy="44" r="4" fill="#FF7A45"/>
   </g>
 </svg>
