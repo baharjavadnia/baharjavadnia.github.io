@@ -255,6 +255,7 @@ dialog.case::backdrop { background: rgba(14,12,30,.5); -webkit-backdrop-filter: 
   background: var(--paper); border: 1.5px solid var(--ink); cursor: grab; user-select: none; touch-action: none; white-space: nowrap; box-shadow: 0 3px 0 var(--ink); transition: box-shadow .15s ease; }
 .chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
 .chip.drag { cursor: grabbing; box-shadow: 0 10px 0 var(--ink); z-index: 5; }
+.sk { color: var(--accent); font-weight: 700; font-size: .85em; }
 .board-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 14px; }
 
 /* Experience */
@@ -369,7 +370,7 @@ footer .brand { margin: 0; color: var(--ink); }
           <h2>Product Manager at Treescribe</h2>
           <p class="when">Since December 2025 · joined as Product Designer</p>
           <p>I shape an AI product end to end: what we build, how it looks and works, and how it reaches people. It hasn't launched yet, so the screens stay private for now. Here's what I work on every day:</p>
-          <div class="chips"><span>Product strategy and scoping</span><span>AI and agent experiences</span><span>Design systems</span><span>Brand and launch</span><span>Analytics</span><span>Agentic workflows</span></div>
+          <div class="chips"><span>Product strategy and scoping</span><span>AI and agent experiences</span><span>Design systems</span><span>Brand and launch</span><span>Analytics</span><span>Agent skills and workflows</span></div>
           <a class="btn" href="mailto:baharjavadniauix@gmail.com?subject=Let%27s%20talk%20about%20your%20AI%20product%20work">Ask me about it in a call</a>
         </div>
         <div class="doc" aria-label="A case study kept private until launch">
@@ -392,7 +393,7 @@ footer .brand { margin: 0; color: var(--ink); }
         <p class="eyebrow">About me</p>
         <h2 class="title">Curious, careful, and <em>a little playful</em>.</h2>
         <p style="margin-top:24px">I started in graphic design and content, making things people stop for. Then UI and UX taught me to make things people can use. Now I manage and design an AI product.</p>
-        <p class="muted">I like research that changes my mind, systems that save the team time, and details nobody notices until they're missing.</p>
+        <p class="muted">I also build. I write skills for AI agents like Claude Code and Codex, and I'm at home in the code.</p>
         <div class="quick">
           <div><small>Based in</small><b>Tehran, working remotely</b></div>
           <div><small>Perspective</small><b>Business, marketing, design and product</b></div>
@@ -419,7 +420,7 @@ footer .brand { margin: 0; color: var(--ink); }
         </div>
         <div class="panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1"><p>I start with the people and the problem: interviews, data and a close look at what exists. Before drawing anything, I agree with the team what success looks like.</p><div><h4>Tools and methods</h4><div class="tags"><span>Interviews</span><span>Surveys</span><span>Analytics</span><span>Journey maps</span><span>Competitive analysis</span></div></div></div>
         <div class="panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden><p>Flows first, then screens. I explore widely, test early with real people and narrow down with the team until the simplest version is clear.</p><div><h4>Tools and methods</h4><div class="tags"><span>Figma</span><span>FigJam</span><span>Claude Design</span><span>Maze</span><span>UXTweak</span><span>Prototyping</span></div></div></div>
-        <div class="panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden><p>I turn designs into systems: tokens, components and specs. I work with AI agents to prototype in code and carry designs into production, and I check every detail on the real product.</p><div><h4>Tools and methods</h4><div class="tags"><span>Design systems</span><span>Figma variables</span><span>AI coding agents</span><span>HTML and CSS</span><span>Design QA</span></div></div></div>
+        <div class="panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden><p>I turn designs into systems: tokens, components and specs. Then I build with AI agents in Claude Code and Codex, write the skills that guide them, and check every detail on the real product.</p><div><h4>Tools and methods</h4><div class="tags"><span>Design systems</span><span>Figma variables</span><span>Claude Code</span><span>Codex</span><span>Agent skills</span><span>Design QA</span></div></div></div>
         <div class="panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" hidden><p>After launch I look at what changed: funnels, recordings and usability tests. Then the next iteration starts, and the repetitive parts get automated.</p><div><h4>Tools and methods</h4><div class="tags"><span>GA4</span><span>Microsoft Clarity</span><span>Usability tests</span><span>A/B tests</span><span>Automation</span></div></div></div>
       </div>
     </div>
@@ -450,9 +451,9 @@ footer .brand { margin: 0; color: var(--ink); }
       </div>
       <div class="reveal">
         <div class="board" id="board">
-          <ul class="sr"><li>Figma</li><li>Claude Design</li><li>FigJam</li><li>Framer</li><li>Webflow</li><li>Maze</li><li>UXTweak</li><li>Optimal Workshop</li><li>Notion</li><li>Illustrator</li><li>Photoshop</li><li>After Effects</li><li>Claude Code</li><li>Codex</li><li>HTML and CSS</li><li>React</li><li>GA4</li></ul>
+          <ul class="sr"><li>Figma</li><li>Claude Design</li><li>FigJam</li><li>Framer</li><li>Webflow</li><li>Maze</li><li>UXTweak</li><li>Optimal Workshop</li><li>Notion</li><li>Illustrator</li><li>Photoshop</li><li>After Effects</li><li>Claude Code, where I write my own agent skills</li><li>Codex, where I write my own agent skills</li><li>HTML and CSS</li><li>React</li><li>GA4</li></ul>
         </div>
-        <div class="board-foot"><span>17 tools, one messy desk.</span><button class="btn small" id="tidy" type="button">Tidy up</button></div>
+        <div class="board-foot"><span>17 tools, one messy desk. The ones marked <b class="sk">✦</b> are where I write my own agent skills.</span><button class="btn small" id="tidy" type="button">Tidy up</button></div>
       </div>
     </div>
   </section>
@@ -493,7 +494,7 @@ footer .brand { margin: 0; color: var(--ink); }
 <footer>
   <div class="wrap">
     <a class="brand" href="#top"><svg aria-hidden="true"><use href="#logo"/></svg><span>Bahar Javadnia</span></a>
-    <span>Designed and built by Bahar, with a little help from AI agents. © 2026</span>
+    <span>Designed and coded by Bahar, with Claude Code. © 2026</span>
   </div>
 </footer>
 
@@ -609,10 +610,10 @@ footer .brand { margin: 0; color: var(--ink); }
 
   /* Toolbox: draggable chips */
   var board = document.getElementById('board');
-  var tools = [['Figma', '#A259FF'], ['Claude Design', '#D97757'], ['FigJam', '#FFC738'], ['Framer', '#0099FF'], ['Webflow', '#4353FF'], ['Maze', '#FF5A5F'], ['UXTweak', '#2BB673'], ['Optimal Workshop', '#00A3E0'], ['Notion', '#888888'], ['Illustrator', '#FF9A00'], ['Photoshop', '#31A8FF'], ['After Effects', '#9999FF'], ['Claude Code', '#D97757'], ['Codex', '#10A37F'], ['HTML and CSS', '#E44D26'], ['React', '#61DAFB'], ['GA4', '#F9AB00']];
+  var tools = [['Figma', '#A259FF'], ['Claude Design', '#D97757'], ['FigJam', '#FFC738'], ['Framer', '#0099FF'], ['Webflow', '#4353FF'], ['Maze', '#FF5A5F'], ['UXTweak', '#2BB673'], ['Optimal Workshop', '#00A3E0'], ['Notion', '#888888'], ['Illustrator', '#FF9A00'], ['Photoshop', '#31A8FF'], ['After Effects', '#9999FF'], ['Claude Code', '#D97757', 1], ['Codex', '#10A37F', 1], ['HTML and CSS', '#E44D26'], ['React', '#61DAFB'], ['GA4', '#F9AB00']];
   var chips = tools.map(function (t) {
     var c = document.createElement('span'); c.className = 'chip'; c.setAttribute('aria-hidden', 'true');
-    c.innerHTML = '<i style="--c:' + t[1] + '"></i>' + t[0]; board.appendChild(c); return c;
+    c.innerHTML = '<i style="--c:' + t[1] + '"></i>' + t[0] + (t[2] ? '<b class="sk">✦</b>' : ''); board.appendChild(c); return c;
   });
   function place(c, x, y, r) { c._x = x; c._y = y; c._r = r; c.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + r + 'deg)'; }
   function scatter(tidy) {
