@@ -207,9 +207,16 @@ dialog.case::backdrop { background: rgba(14,12,30,.5); -webkit-backdrop-filter: 
 .story p { font-size: clamp(17px, 1.6vw, 19px); margin: 0 0 16px; max-width: 36em; }
 .story p.muted { color: var(--muted); }
 .quick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
-.quick div { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; transition: transform .2s ease, border-color .2s ease; }
-.quick div:hover { transform: translateY(-3px) rotate(-.6deg); border-color: var(--accent); }
+.quick > div { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; transition: transform .2s ease, border-color .2s ease; }
+.quick > div:hover { transform: translateY(-3px) rotate(-.6deg); border-color: var(--accent); }
 .quick small { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 2px; }
+.quick { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.quick .wide { grid-column: 1 / -1; }
+.quick .degs { display: flex; flex-wrap: wrap; gap: 8px 36px; }
+.quick .degs p { margin: 0; font-size: 16px; }
+.quick .degs b { display: block; }
+.quick .degs span { color: var(--muted); font-size: 14.5px; }
+@media (max-width: 560px) { .quick { grid-template-columns: minmax(0, 1fr); } }
 .quick b { font-weight: 600; }
 
 /* Process tabs */
@@ -385,13 +392,14 @@ footer .brand { margin: 0; color: var(--ink); }
         <p class="eyebrow">About me</p>
         <h2 class="title">Curious, careful, and <em>a little playful</em>.</h2>
         <p style="margin-top:24px">I started in graphic design, social media management and content creation: posters, campaigns, photography and the content calendars behind them. That taught me to make things people stop for.</p>
-        <p>UI and UX taught me to make things people can use. Now I design AI products, where the hard part is making a capable system feel simple and trustworthy. Alongside my work, I'm studying for a master's in business design at the University of Tehran.</p>
+        <p>UI and UX taught me to make things people can use. Now I design AI products, where the hard part is making a capable system feel simple and trustworthy.</p>
+        <p>I did my bachelor's in multimedia at Kharazmi University, and alongside my work I'm studying for a master's in business design at the University of Tehran.</p>
         <p class="muted">I like research that changes my mind, systems that save the team time, and details nobody notices until they're missing.</p>
         <div class="quick">
           <div><small>Based in</small><b>Tehran, working remotely</b></div>
           <div><small>Languages</small><b>Persian, English, Turkish, Italian</b></div>
-          <div><small>Studying</small><b>Master's in Business Design, University of Tehran</b></div>
           <div><small>Started in</small><b>Graphic design, social media and content</b></div>
+          <div class="wide"><small>Education</small><div class="degs"><p><b>B.Sc. Multimedia</b><span>Kharazmi University</span></p><p><b>Master's in Business Design</b><span>University of Tehran · studying now</span></p></div></div>
         </div>
       </div>
     </div>
