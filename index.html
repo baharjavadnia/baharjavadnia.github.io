@@ -219,8 +219,6 @@ dialog.case::backdrop { background: rgba(14,12,30,.5); -webkit-backdrop-filter: 
 .sheen { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .4s ease;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.38), rgba(255,255,255,0) 46%); }
 .avatar:hover .sheen { opacity: 1; }
-.credit { margin: 12px 0 0; text-align: center; font-size: 12px; color: var(--muted); }
-.credit a { color: inherit; }
 @media (prefers-reduced-motion: reduce) { .stage, .stage .person, .stage .depth { transition: none; animation: none; } }
 .story p { font-size: clamp(17px, 1.6vw, 19px); margin: 0 0 16px; max-width: 36em; }
 .story p.muted { color: var(--muted); }
@@ -407,11 +405,11 @@ footer .brand { margin: 0; color: var(--ink); }
         <div class="avatar" id="avatar">
           <span class="stage">
             <img class="depth d1" src="assets/shapes/s15.png" alt=""><img class="depth d2" src="assets/shapes/s12.png" alt=""><img class="depth d3" src="assets/shapes/s3.png" alt="">
-            <img class="person" src="assets/character.svg" alt="Illustrated portrait of Bahar">
+            <img class="person" src="assets/character.svg" alt="Illustrated portrait of Bahar" title="Illustration: Micah by Micah Lanier, CC BY 4.0">
             <span class="sheen" aria-hidden="true"></span>
           </span>
         </div>
-        <p class="credit">Illustration based on <a href="https://www.dicebear.com/styles/micah/">Micah</a> by Micah Lanier, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+        <!-- Illustration: "Micah" by Micah Lanier (https://www.dicebear.com/styles/micah/), licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). -->
       </div>
       <div class="story reveal">
         <p class="eyebrow">About me</p>
