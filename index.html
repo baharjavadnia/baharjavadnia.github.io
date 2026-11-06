@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://baharjavadnia.github.io/">
 <meta property="og:image" content="https://baharjavadnia.github.io/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234A45C4'/%3E%3Cpath d='M10 7l13 9-6 1.6L13.6 24z' fill='white'/%3E%3C/svg%3E">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@ a { color: inherit; }
   padding: 0 var(--pad); background: var(--chrome); border-bottom: 1px solid var(--line);
 }
 .file { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 13.5px; }
-.file .logo { width: 26px; height: 26px; border-radius: 7px; background: var(--sel); display: grid; place-items: center; flex: 0 0 auto; }
+.file .mark { width: 30px; height: 30px; color: var(--sel); flex: 0 0 auto; margin-left: -3px; }
 .file b { font-weight: 600; white-space: nowrap; }
 .file span { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar .spacer { flex: 1; }
@@ -326,7 +326,7 @@ dialog.inspector::backdrop { background: rgba(20,20,28,.28); }
 
 <header class="bar">
   <div class="file">
-    <span class="logo" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 1l8.5 5.5-4 1-2.3 3.5z" fill="#fff"/></svg></span>
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(1.5 1.5)"><g fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"><path d="M27 54 V22"/><path d="M27 54 H38 A11 11 0 0 0 38 32 H27"/><path d="M27 22 L17 12"/><path d="M27 22 L37 12"/></g><circle cx="14" cy="9" r="5" fill="var(--claude)"/><circle cx="40" cy="9" r="5" fill="currentColor"/></g></svg>
     <b>Bahar Javadnia</b><span>/ Portfolio</span>
   </div>
   <div class="spacer"></div>
