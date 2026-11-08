@@ -113,7 +113,7 @@ img { max-width: 100%; }
 
 /* Sections, each marked by one of the shapes */
 section.block { padding: clamp(80px, 11vw, 140px) 0 0; }
-.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; display: flex; align-items: center; gap: 12px; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 24px; display: flex; align-items: center; gap: 12px; }
 .mark { position: relative; width: 34px; height: 34px; flex: 0 0 auto; display: inline-grid; place-items: center; margin: -6px 0; }
 .mark img { width: 34px; height: 34px; display: block; filter: drop-shadow(0 4px 6px rgba(25,23,43,.18)); transition: opacity .3s ease; }
 .mark::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0; transition: opacity .3s ease; }
@@ -123,10 +123,10 @@ section.block { padding: clamp(80px, 11vw, 140px) 0 0; }
   transition: opacity .3s ease, scale .22s ease; filter: drop-shadow(0 4px 6px rgba(25,23,43,.22)); will-change: transform; }
 .traveller.on { opacity: 1; }
 .traveller.pop { scale: .5; }
-.title { font-family: var(--serif); font-variation-settings: "SOFT" 100, "WONK" 0; font-weight: 600; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.02; letter-spacing: -0.03em; margin: 0; max-width: 16ch; }
+.title { font-family: var(--serif); font-variation-settings: "SOFT" 100, "WONK" 0; font-weight: 600; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin: 0; max-width: 16ch; }
 .title em { font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--accent); }
-.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 40px; margin-bottom: 40px; }
-.head p { margin: 0; color: var(--muted); max-width: 38ch; }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 40px; margin-bottom: 48px; }
+.head > p { margin: 0; color: var(--muted); max-width: 38ch; }
 
 /* Work */
 .work { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 22px; }
@@ -157,7 +157,7 @@ section.block { padding: clamp(80px, 11vw, 140px) 0 0; }
 @media (max-width: 620px) { .more img { width: 96px; } .more img + img { width: 72px; } }
 
 /* Work filters */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -8px 0 28px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -16px 0 32px; }
 .filter { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
   font-size: 14.5px; font-weight: 500; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
 .filter img { width: 24px; height: 24px; display: block; transition: transform .45s cubic-bezier(.3,1.4,.5,1); }
@@ -204,7 +204,7 @@ dialog.viewer::backdrop { background: var(--paper); }
 .v-info h2 { font-family: var(--serif); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: clamp(36px, 4.4vw, 56px); letter-spacing: -0.03em; line-height: 1; margin: 0 0 10px; }
 .v-info .one { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
 .v-info h3 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 26px 0 10px; }
-.v-info p { margin: 0; }
+.v-info p:not(.eyebrow) { margin: 0; }
 .v-info ul.did { margin: 0 0 30px; padding-left: 20px; display: grid; gap: 8px; }
 .v-info ul.did li::marker { color: var(--pop); }
 .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
@@ -250,7 +250,7 @@ dialog.viewer::backdrop { background: var(--paper); }
 @media (max-width: 860px) { .about { grid-template-columns: minmax(0, 1fr); } }
 .portrait { max-width: 430px; }
 .avatar { position: relative; display: block; perspective: 1000px; }
-.stage { position: relative; display: block; padding: 14px 14px 0; border-radius: 26px; background: var(--card); border: 1px solid var(--line);
+.stage { position: relative; display: block; padding: 14px 14px 44px; border-radius: 26px; background: var(--card); border: 1px solid var(--line);
   box-shadow: 0 2px 4px rgba(25,23,43,.05), 0 24px 50px rgba(25,23,43,.12);
   transform: rotate(-2deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1); will-change: transform; }
 .avatar:hover .stage { transform: rotate(0deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
@@ -258,14 +258,13 @@ dialog.viewer::backdrop { background: var(--paper); }
 .pic { position: relative; display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: var(--pic); }
 .pic .person { position: relative; width: 94%; display: block; margin-bottom: -1%;
   translate: calc(var(--px, 0) * -6px) calc(var(--py, 0) * -4px); transition: translate .6s cubic-bezier(.2,.8,.2,1); }
-.cap { display: block; padding: 12px 6px 16px; text-align: center; font-family: var(--serif); font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 19px; color: var(--muted); }
 .sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s ease;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.4), rgba(255,255,255,0) 46%); }
 .avatar:hover .sheen { opacity: 1; }
 .weight { position: absolute; z-index: 2; width: 88px; right: -26px; top: -32px; rotate: 14deg; pointer-events: none; filter: drop-shadow(0 12px 14px rgba(25,23,43,.24));
   translate: calc(var(--px, 0) * 12px) calc(var(--py, 0) * 9px); transition: translate .6s cubic-bezier(.2,.8,.2,1); }
 @media (max-width: 600px) { .weight { right: 4px; width: 72px; } }
-.story p { font-size: clamp(17px, 1.6vw, 19px); margin: 0 0 16px; max-width: 36em; }
+.story p:not(.eyebrow) { font-size: clamp(17px, 1.6vw, 19px); margin: 0 0 16px; max-width: 36em; }
 .story p.muted { color: var(--muted); }
 .quick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
 .quick > div { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; transition: transform .2s ease, border-color .2s ease; }
@@ -400,7 +399,7 @@ footer .brand { margin: 0; color: var(--ink); }
       <a class="btn primary" href="#work">See my work</a>
       <a class="btn" href="cv.pdf" download>Download CV</a>
     </div>
-    <p class="hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/></svg><span>Psst: grab a shape and throw it, or click anywhere for more.</span></p>
+    <p class="hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/></svg><span>Grab a shape and throw it.</span></p>
   </div>
   <div class="playground" id="playground" aria-hidden="true"></div>
 </header>
@@ -417,7 +416,6 @@ footer .brand { margin: 0; color: var(--ink); }
     <div class="wrap">
       <div class="head reveal">
         <div><p class="eyebrow"><span class="mark" data-shape="s12"><img src="assets/shapes/s12.png" alt=""></span>Selected work</p><h2 class="title">Things I've <em>made</em>.</h2></div>
-        <p>Websites, apps and case studies, from research to the last pixel. Open one for the full story.</p>
       </div>
       <div class="filters reveal" role="group" aria-label="Filter projects">
         <button class="filter" type="button" data-filter="all" aria-pressed="true"><img src="assets/shapes/s12.png" alt="">All <span>6</span></button>
@@ -474,7 +472,6 @@ footer .brand { margin: 0; color: var(--ink); }
         <div class="avatar" id="avatar">
           <div class="stage">
             <span class="pic"><img class="person" src="assets/character.svg" alt="Illustrated portrait of Bahar" title="Illustration: Micah by Micah Lanier, CC BY 4.0"></span>
-            <span class="cap">Me, more or less.</span>
             <span class="sheen" aria-hidden="true"></span>
           </div>
           <img class="weight" src="assets/shapes/s18.png" alt="">
@@ -501,7 +498,6 @@ footer .brand { margin: 0; color: var(--ink); }
     <div class="wrap">
       <div class="head reveal">
         <div><p class="eyebrow"><span class="mark" data-shape="s14"><img src="assets/shapes/s14.png" alt=""></span>How I work</p><h2 class="title">From a messy problem to a shipped answer.</h2></div>
-        <p>Four steps I come back to on every project, what each one covers, and the tools I use.</p>
       </div>
       <div class="process reveal">
         <div class="tabs" role="tablist" aria-label="Process steps">
