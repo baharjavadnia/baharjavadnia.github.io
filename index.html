@@ -156,6 +156,23 @@ section.block { padding: clamp(80px, 11vw, 140px) 0 0; }
 .more img + img { width: 110px; right: 24%; top: 46%; transform: rotate(-18deg); }
 @media (max-width: 620px) { .more img { width: 96px; } .more img + img { width: 72px; } }
 
+/* Work filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: -8px 0 28px; }
+.filter { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
+  font-size: 14.5px; font-weight: 500; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.filter img { width: 24px; height: 24px; display: block; transition: transform .45s cubic-bezier(.3,1.4,.5,1); }
+.filter span { font-size: 12.5px; color: var(--muted); }
+.filter:hover { border-color: var(--accent); }
+.filter:hover img { transform: rotate(-20deg) scale(1.12); }
+.filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.filter[aria-pressed="true"] span { color: inherit; opacity: .7; }
+.filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.work .card[hidden], .work .more[hidden] { display: none; }
+.work[data-n="1"] .card, .work[data-n="2"] .card { grid-column: span 6; }
+.work[data-n="3"] .card { grid-column: span 4; }
+@media (max-width: 960px) { .work[data-n] .card { grid-column: span 6; } }
+@media (max-width: 620px) { .work[data-n] .card { grid-column: span 12; } }
+
 /* Case viewer: full screen */
 dialog.viewer { border: 0; padding: 0; margin: 0; width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; background: var(--paper); color: var(--ink); overflow: hidden; }
 dialog.viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
@@ -308,18 +325,34 @@ dialog.viewer::backdrop { background: var(--paper); }
 .extras ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .extras li small { display: block; color: var(--muted); font-size: 13.5px; }
 
-/* Contact */
-.contact { text-align: center; padding: clamp(90px, 12vw, 160px) 0 40px; position: relative; }
-.contact h2 { font-family: var(--serif); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: clamp(44px, 8vw, 112px); line-height: .98; letter-spacing: -0.035em; margin: 0 auto 28px; max-width: 12ch; }
+/* Contact: a brief that drafts the email, then the shape pile again */
+.contact { text-align: center; padding: clamp(90px, 12vw, 160px) 0 230px; position: relative; overflow: hidden; touch-action: pan-y; }
+.contact .wrap { position: relative; z-index: 2; }
+.contact h2 { font-family: var(--serif); font-variation-settings: "SOFT" 100; font-weight: 600; font-size: clamp(44px, 7vw, 100px); line-height: .98; letter-spacing: -0.035em; margin: 0 auto 36px; max-width: 12ch; }
 .contact h2 em { font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--accent); }
+.brief { max-width: 760px; margin: 0 auto 34px; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: clamp(20px, 3vw, 32px); box-shadow: var(--shadow); }
+.brief-q { margin: 0 0 12px; font-weight: 600; font-size: 15px; }
+.brief-q span { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.brief-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+.pick { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper);
+  font-size: 14.5px; font-weight: 500; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.pick img { width: 20px; height: 20px; display: block; transition: transform .45s cubic-bezier(.3,1.4,.5,1); }
+.pick:hover { border-color: var(--accent); }
+.pick:hover img { transform: rotate(-20deg) scale(1.12); }
+.pick[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.draft { background: var(--paper); border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--line)); border-radius: 18px; padding: 16px 18px; margin: 0 0 18px; }
+.draft small { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+.draft p { margin: 0; font-family: var(--serif); font-variation-settings: "SOFT" 100; font-size: clamp(17px, 1.8vw, 20px); line-height: 1.45; }
+.brief-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.or { margin: 0 0 14px; color: var(--muted); font-size: 14.5px; }
 .mail { display: inline-flex; align-items: center; gap: 6px; padding: 8px 8px 8px 22px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: clamp(15px, 2vw, 19px); font-weight: 500; max-width: 100%; }
 .mail a { text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 26px; }
+.socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 22px; }
 .socials a { text-decoration: none; font-size: 15px; font-weight: 500; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
 .socials a:hover { border-color: var(--accent); color: var(--accent); }
-.contact .deco { position: absolute; width: 110px; filter: drop-shadow(0 12px 16px rgba(0,0,0,.16)); pointer-events: none; }
-.contact .d1 { left: 6%; top: 18%; transform: rotate(-16deg); } .contact .d2 { right: 7%; top: 30%; width: 90px; transform: rotate(22deg); } .contact .d3 { left: 14%; bottom: 8%; width: 70px; }
-@media (max-width: 700px) { .contact .deco { width: 60px; } .contact .d3 { display: none; } }
+@media (max-width: 700px) { .contact { padding-bottom: 190px; } }
+@media (max-width: 520px) { .pick { font-size: 13.5px; padding: 7px 11px; gap: 6px; } .pick img { width: 18px; height: 18px; } .brief-row { gap: 6px; } }
 footer { border-top: 1px solid var(--line); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 24px; padding-bottom: 32px; color: var(--muted); font-size: 14px; }
 footer .brand { margin: 0; color: var(--ink); }
@@ -386,13 +419,21 @@ footer .brand { margin: 0; color: var(--ink); }
         <div><p class="eyebrow"><span class="mark" data-shape="s12"><img src="assets/shapes/s12.png" alt=""></span>Selected work</p><h2 class="title">Things I've <em>made</em>.</h2></div>
         <p>Websites, apps and case studies, from research to the last pixel. Open one for the full story.</p>
       </div>
+      <div class="filters reveal" role="group" aria-label="Filter projects">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true"><img src="assets/shapes/s12.png" alt="">All <span>6</span></button>
+        <button class="filter" type="button" data-filter="web" aria-pressed="false"><img src="assets/shapes/s10.png" alt="">Websites <span>2</span></button>
+        <button class="filter" type="button" data-filter="apps" aria-pressed="false"><img src="assets/shapes/s16.png" alt="">Apps <span>3</span></button>
+        <button class="filter" type="button" data-filter="systems" aria-pressed="false"><img src="assets/shapes/s22.png" alt="">Design systems <span>2</span></button>
+        <button class="filter" type="button" data-filter="research" aria-pressed="false"><img src="assets/shapes/s3.png" alt="">UX research <span>1</span></button>
+      </div>
+      <p class="sr" id="filter-status" aria-live="polite"></p>
       <div class="work">
-        <article class="card lg reveal"><button type="button" data-case="ilearn"><div class="media"><img src="assets/work/ilearn-cover.jpg" alt="iLearn website screens on a purple background" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Web design · E-commerce</span><span>Team project</span></div><h3>iLearn</h3><p>A shorter path from finding a course to checkout.</p></button></article>
-        <article class="card md reveal"><button type="button" data-case="unimind"><div class="media"><img src="assets/work/unimind-cover.jpg" alt="UniMind website on a laptop" loading="lazy"><span class="view">View</span></div><div class="meta"><span>UX case study</span><span>Team project</span></div><h3>UniMind</h3><p>Calm, private support for stressed students.</p></button></article>
-        <article class="card reveal"><button type="button" data-case="tripo"><div class="media"><img src="assets/work/tripo-cover.jpg" alt="Tripo travel app screens" loading="lazy"><span class="view">View</span></div><div class="meta"><span>App design</span><span>Solo</span></div><h3>Tripo</h3><p>Flights, stays and plans in one calm place.</p></button></article>
-        <article class="card reveal"><button type="button" data-case="flowpay"><div class="media"><img src="assets/work/flowpay-cover.jpg" alt="FlowPay mobile app UI kit" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Fintech design system</span><span>Solo</span></div><h3>FlowPay</h3><p>One design system behind 200+ finance screens.</p></button></article>
-        <article class="card reveal"><button type="button" data-case="savely"><div class="media"><img src="assets/work/savely-cover.jpg" alt="Savely onboarding screens" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Onboarding concept</span><span>Solo</span></div><h3>Savely</h3><p>Onboarding that earns trust in the first minute.</p></button></article>
-        <article class="card md reveal"><button type="button" data-case="aurex"><div class="media"><img src="assets/work/aurex-cover.jpg" alt="AUREX landing page on a laptop" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Landing page</span><span>Solo</span></div><h3>AUREX</h3><p>A launch page that sells the feeling and the specs.</p></button></article>
+        <article data-tags="web systems" class="card lg reveal"><button type="button" data-case="ilearn"><div class="media"><img src="assets/work/ilearn-cover.jpg" alt="iLearn website screens on a purple background" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Web design · E-commerce</span><span>Team project</span></div><h3>iLearn</h3><p>A shorter path from finding a course to checkout.</p></button></article>
+        <article data-tags="research" class="card md reveal"><button type="button" data-case="unimind"><div class="media"><img src="assets/work/unimind-cover.jpg" alt="UniMind website on a laptop" loading="lazy"><span class="view">View</span></div><div class="meta"><span>UX case study</span><span>Team project</span></div><h3>UniMind</h3><p>Calm, private support for stressed students.</p></button></article>
+        <article data-tags="apps" class="card reveal"><button type="button" data-case="tripo"><div class="media"><img src="assets/work/tripo-cover.jpg" alt="Tripo travel app screens" loading="lazy"><span class="view">View</span></div><div class="meta"><span>App design</span><span>Solo</span></div><h3>Tripo</h3><p>Flights, stays and plans in one calm place.</p></button></article>
+        <article data-tags="apps systems" class="card reveal"><button type="button" data-case="flowpay"><div class="media"><img src="assets/work/flowpay-cover.jpg" alt="FlowPay mobile app UI kit" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Fintech design system</span><span>Solo</span></div><h3>FlowPay</h3><p>One design system behind 200+ finance screens.</p></button></article>
+        <article data-tags="apps" class="card reveal"><button type="button" data-case="savely"><div class="media"><img src="assets/work/savely-cover.jpg" alt="Savely onboarding screens" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Onboarding concept</span><span>Solo</span></div><h3>Savely</h3><p>Onboarding that earns trust in the first minute.</p></button></article>
+        <article data-tags="web" class="card md reveal"><button type="button" data-case="aurex"><div class="media"><img src="assets/work/aurex-cover.jpg" alt="AUREX landing page on a laptop" loading="lazy"><span class="view">View</span></div><div class="meta"><span>Landing page</span><span>Solo</span></div><h3>AUREX</h3><p>A launch page that sells the feeling and the specs.</p></button></article>
         <div class="more reveal">
           <h3>More shots on Behance and Dribbble.</h3>
           <div class="row"><a class="btn" href="https://www.behance.net/baharjavadniauix">Behance ↗</a><a class="btn" href="https://dribbble.com/baharjavadnia">Dribbble ↗</a></div>
@@ -542,15 +583,35 @@ footer .brand { margin: 0; color: var(--ink); }
   </section>
 
   <section class="contact" id="contact">
-    <img class="deco d1" src="assets/shapes/s12.png" alt=""><img class="deco d2" src="assets/shapes/s4.png" alt=""><img class="deco d3" src="assets/shapes/s24.png" alt="">
     <div class="wrap reveal">
       <p class="eyebrow" style="justify-content:center"><span class="mark" data-shape="s19"><img src="assets/shapes/s19.png" alt=""></span>Contact</p>
       <h2>Let's make something people <em>love</em>.</h2>
+      <div class="brief">
+        <p class="brief-q" id="q-type">What brings you here?</p>
+        <div class="brief-row" role="group" aria-labelledby="q-type">
+          <button class="pick" type="button" data-type="job" aria-pressed="true">A full-time role</button>
+          <button class="pick" type="button" data-type="project" aria-pressed="false">A freelance project</button>
+          <button class="pick" type="button" data-type="hi" aria-pressed="false">Just saying hi</button>
+        </div>
+        <p class="brief-q" id="q-topic">What's it about?<span>Pick any</span></p>
+        <div class="brief-row" role="group" aria-labelledby="q-topic">
+          <button class="pick" type="button" data-topic="product management" data-short="Product management" aria-pressed="false"><img src="assets/shapes/s19.png" alt="">Product management</button>
+          <button class="pick" type="button" data-topic="product design" data-short="Product design" aria-pressed="false"><img src="assets/shapes/s12.png" alt="">Product design</button>
+          <button class="pick" type="button" data-topic="AI agents" data-short="AI agents" aria-pressed="false"><img src="assets/shapes/s15.png" alt="">AI agents</button>
+          <button class="pick" type="button" data-topic="design systems" data-short="Design systems" aria-pressed="false"><img src="assets/shapes/s22.png" alt="">Design systems</button>
+          <button class="pick" type="button" data-topic="web design" data-short="Web design" aria-pressed="false"><img src="assets/shapes/s14.png" alt="">Web design</button>
+          <button class="pick" type="button" data-topic="user research" data-short="User research" aria-pressed="false"><img src="assets/shapes/s3.png" alt="">User research</button>
+        </div>
+        <div class="draft"><small>Your first line</small><p id="draft-text" aria-live="polite"></p></div>
+        <div class="brief-actions"><a class="btn primary" id="draft-send" href="mailto:baharjavadniauix@gmail.com">Open in email</a><button class="btn" id="draft-copy" type="button">Copy text</button></div>
+      </div>
+      <p class="or">Or write to me directly</p>
       <div class="mail"><a href="mailto:baharjavadniauix@gmail.com" id="email">baharjavadniauix@gmail.com</a><button class="btn primary small" id="copy" type="button">Copy</button></div>
       <div class="socials">
         <a href="https://www.linkedin.com/in/baharjavadniauix">LinkedIn</a><a href="https://www.behance.net/baharjavadniauix">Behance</a><a href="https://dribbble.com/baharjavadnia">Dribbble</a><a href="https://www.figma.com/@baharjavadniauxd">Figma</a><a href="https://www.instagram.com/uixbahar">Instagram</a><a href="https://t.me/baharjvvd">Telegram</a>
       </div>
     </div>
+    <div class="playground" id="playground2" aria-hidden="true"></div>
   </section>
 </main>
 
@@ -770,6 +831,69 @@ footer .brand { margin: 0; color: var(--ink); }
     });
   }
 
+  /* Work filters: cards shuffle into place */
+  var grid = document.querySelector('.work'), workCards = Array.prototype.slice.call(grid.querySelectorAll('.card')), moreCard = grid.querySelector('.more');
+  var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.filter')), filterStatus = document.getElementById('filter-status');
+  var applyFilter = function (f, label) {
+    var all = workCards.concat([moreCard]), first = new Map();
+    all.forEach(function (el) { if (!el.hidden) first.set(el, el.getBoundingClientRect()); });
+    var shown = 0;
+    workCards.forEach(function (c) { var on = f === 'all' || c.getAttribute('data-tags').split(' ').indexOf(f) !== -1; c.hidden = !on; if (on) { shown++; c.classList.add('in'); } });
+    moreCard.hidden = f !== 'all';
+    if (f === 'all') grid.removeAttribute('data-n'); else grid.setAttribute('data-n', shown);
+    filterStatus.textContent = 'Showing ' + shown + (shown === 1 ? ' project' : ' projects') + (f === 'all' ? '' : ': ' + label);
+    if (reduce || !Element.prototype.animate) return;
+    all.forEach(function (el, i) {
+      if (el.hidden) return;
+      var last = el.getBoundingClientRect(), was = first.get(el);
+      if (was) {
+        var dx = was.left - last.left, dy = was.top - last.top, k = was.width / last.width;
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1 && Math.abs(k - 1) < .01) return;
+        el.animate([{ transformOrigin: 'top left', transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + k + ')' }, { transformOrigin: 'top left', transform: 'none' }], { duration: 560, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      } else {
+        el.animate([{ opacity: 0, transform: 'translateY(18px) scale(.94)' }, { opacity: 1, transform: 'none' }], { duration: 480, delay: i * 40, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+      }
+    });
+  };
+  filterBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (b.getAttribute('aria-pressed') === 'true') return;
+      filterBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      applyFilter(b.getAttribute('data-filter'), b.firstChild.nextSibling.textContent.trim());
+    });
+  });
+
+  /* Contact brief: pick what you need, and the first line of the email writes itself */
+  var typePicks = Array.prototype.slice.call(document.querySelectorAll('.pick[data-type]'));
+  var topicPicks = Array.prototype.slice.call(document.querySelectorAll('.pick[data-topic]'));
+  var draftText = document.getElementById('draft-text'), draftSend = document.getElementById('draft-send'), draftCopy = document.getElementById('draft-copy');
+  var listOf = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
+  var compose = function () {
+    var type = (typePicks.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || typePicks[0]).getAttribute('data-type');
+    var on = topicPicks.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; });
+    var topics = listOf(on.map(function (b) { return b.getAttribute('data-topic'); }));
+    var line, subject;
+    if (type === 'job') { line = 'Hi Bahar, we’re hiring, and I’d love to talk with you about a full-time role' + (topics ? ' in ' + topics : '') + '.'; subject = 'A full-time role'; }
+    else if (type === 'project') { line = 'Hi Bahar, I have a project I’d love your help with' + (topics ? ', mainly ' + topics : '') + '.'; subject = 'A freelance project'; }
+    else { line = 'Hi Bahar, I came across your portfolio and wanted to say hello' + (topics ? ', and chat about ' + topics : '') + '.'; subject = 'Hello from your portfolio'; }
+    if (on.length) subject += ': ' + on.map(function (b) { return b.getAttribute('data-short'); }).join(', ');
+    return { line: line, subject: subject };
+  };
+  var refresh = function (animate) {
+    var d = compose();
+    draftText.textContent = d.line;
+    draftSend.href = 'mailto:baharjavadniauix@gmail.com?subject=' + encodeURIComponent(d.subject) + '&body=' + encodeURIComponent(d.line + '\n\n');
+    if (animate && !reduce && draftText.animate) draftText.animate([{ opacity: .2, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'ease-out' });
+  };
+  typePicks.forEach(function (b) { b.addEventListener('click', function () { typePicks.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); refresh(true); }); });
+  topicPicks.forEach(function (b) { b.addEventListener('click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); refresh(true); }); });
+  draftCopy.addEventListener('click', function () {
+    var t = compose().line;
+    var done = function () { draftCopy.textContent = 'Copied'; setTimeout(function () { draftCopy.textContent = 'Copy text'; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () {}); 
+  });
+  refresh(false);
+
   /* Copy email */
   var copy = document.getElementById('copy');
   copy.addEventListener('click', function () {
@@ -778,27 +902,26 @@ footer .brand { margin: 0; color: var(--ink); }
     else location.href = 'mailto:baharjavadniauix@gmail.com';
   });
 
-  /* Hero playground: the 3D shapes, with physics. On wide screens a hidden ramp gathers them into a pile on the right. */
-  var hero = document.getElementById('top'), pg = document.getElementById('playground');
+  /* Shape playgrounds: the hero pile, and the same pile again at the end of the page.
+     On wide screens a hidden ramp in the hero gathers the shapes on the right. */
   // Colour order: neighbours never share a colour, so each new shape looks different from the last one.
   var names = ['s12', 's10', 's16', 's3', 's14', 's19', 's22', 's1', 's17', 's24', 's18', 's15', 's4', 's8'];
   var cursor = 0;
   var nextName = function () { var n = names[cursor % names.length]; cursor++; return n; };
   var small = window.innerWidth < 700;
-  var isWide = function () { return hero.clientWidth >= 900; };
   var sizeFor = function () { return small ? 58 + Math.random() * 30 : 84 + Math.random() * 40; };
-  var makeImg = function (name, size) {
+  var makeImg = function (pg, name, size) {
     var i = document.createElement('img'); i.className = 'shape'; i.src = 'assets/shapes/' + name + '.png'; i.alt = ''; i.draggable = false;
     i.style.width = i.style.height = size + 'px'; pg.appendChild(i); return i;
   };
-  var staticLayout = function () {
-    var W = hero.clientWidth, H = hero.clientHeight - (small ? 8 : 14);
-    if (isWide()) {
+  var staticLayout = function (host, pg, ramp) {
+    var W = host.clientWidth, H = host.clientHeight - (small ? 8 : 14);
+    if (ramp && W >= 900) {
       var rows = [5, 4, 3], s = 96, k = 0;
       rows.forEach(function (n, r) {
         for (var j = 0; j < n; j++) {
           var x = W * 0.97 - (j + 1) * (s + 6) - r * (s / 2 + 3), y = H - (r + 1) * (s - 8);
-          var img = makeImg(names[k++ % names.length], s); img.style.cursor = 'default';
+          var img = makeImg(pg, names[k++ % names.length], s); img.style.cursor = 'default';
           img.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + ((k * 37) % 50 - 25) + 'deg)';
         }
       });
@@ -806,42 +929,29 @@ footer .brand { margin: 0; color: var(--ink); }
     }
     var n = small ? 7 : 12, x = W * 0.04;
     for (var q = 0; q < n; q++) {
-      var sz = small ? 64 : 104, im = makeImg(names[q % names.length], sz);
+      var sz = small ? 64 : 104, im = makeImg(pg, names[q % names.length], sz);
       im.style.cursor = 'default';
       im.style.transform = 'translate(' + x + 'px,' + (H - sz - 26 - (q % 2) * 18) + 'px) rotate(' + ((q * 37) % 50 - 25) + 'deg)';
       x += (W * 0.92) / n;
     }
   };
-  var physics = function () {
-    var M = window.Matter; if (!M || reduce) { staticLayout(); return; }
+  var playground = function (host, pg, o) {
+    var M = window.Matter; if (!M || reduce) { staticLayout(host, pg, o.ramp); return; }
     var engine = M.Engine.create(); engine.gravity.y = 1.1;
     var world = engine.world, walls = [], items = [];
     var buildWalls = function () {
       if (walls.length) M.Composite.remove(world, walls);
-      var W = hero.clientWidth, H = hero.clientHeight, fy = H - (small ? 8 : 14), o = { isStatic: true, friction: 0.4 };
-      walls = [M.Bodies.rectangle(W / 2, fy + 40, W * 3, 80, o), M.Bodies.rectangle(-40, H / 2 - 400, 80, H * 3, o), M.Bodies.rectangle(W + 40, H / 2 - 400, 80, H * 3, o)];
-      if (isWide()) {
+      var W = host.clientWidth, H = host.clientHeight, fy = H - (small ? 8 : 14), st = { isStatic: true, friction: 0.4 };
+      walls = [M.Bodies.rectangle(W / 2, fy + 40, W * 3, 80, st), M.Bodies.rectangle(-40, H / 2 - 400, 80, H * 3, st), M.Bodies.rectangle(W + 40, H / 2 - 400, 80, H * 3, st)];
+      if (o.ramp && W >= 900) {
         var x1 = -60, y1 = fy - 190, x2 = W * 0.6, y2 = fy, a = Math.atan2(y2 - y1, x2 - x1), L = Math.hypot(x2 - x1, y2 - y1) + 60, T = 60;
         walls.push(M.Bodies.rectangle((x1 + x2) / 2 - Math.sin(a) * T / 2, (y1 + y2) / 2 + Math.cos(a) * T / 2, L, T, { isStatic: true, friction: 0.02, angle: a }));
       }
       M.Composite.add(world, walls);
     };
     buildWalls();
-    var add = function (name, x, y) {
-      var s = sizeFor(), b = M.Bodies.circle(x, y, s * 0.4, { restitution: 0.45, friction: 0.06, frictionAir: 0.012, density: 0.0016, angle: Math.random() * 6 });
-      M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.2);
-      var img = makeImg(name, s); b.plugin.img = img; b.plugin.s = s;
-      M.Composite.add(world, b); items.push(b);
-      img.addEventListener('pointerdown', function (e) { grab(e, b, img); });
-      if (items.length > (small ? 16 : 22)) { var old = items.shift(); M.Composite.remove(world, old); old.plugin.img.remove(); }
-      return b;
-    };
-    var W0 = hero.clientWidth, count = small ? 8 : 14, wide0 = isWide();
-    for (var k = 0; k < count; k++) (function (k) {
-      setTimeout(function () { add(nextName(), W0 * (wide0 ? 0.62 + 0.33 * Math.random() : 0.1 + 0.8 * Math.random()), -80 - Math.random() * 200); }, 250 + k * 140);
-    })(k);
     var drag = null;
-    var local = function (e) { var r = hero.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    var local = function (e) { var r = host.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
     var grab = function (e, b, img) {
       e.preventDefault(); e.stopPropagation(); img.setPointerCapture(e.pointerId);
       drag = M.Constraint.create({ pointA: local(e), bodyB: b, pointB: { x: 0, y: 0 }, stiffness: 0.12, damping: 0.08, length: 0 });
@@ -850,11 +960,26 @@ footer .brand { margin: 0; color: var(--ink); }
       var up = function () { if (drag) { M.Composite.remove(world, drag); drag = null; } img.removeEventListener('pointermove', move); img.removeEventListener('pointerup', up); img.removeEventListener('pointercancel', up); };
       img.addEventListener('pointermove', move); img.addEventListener('pointerup', up); img.addEventListener('pointercancel', up);
     };
-    hero.addEventListener('click', function (e) {
-      if (e.target.closest('a, button, .shape')) return;
-      var p = local(e); add(nextName(), p.x, Math.min(p.y, 40) - 60);
+    var add = function (name, x, y) {
+      var s = sizeFor(), b = M.Bodies.circle(x, y, s * 0.4, { restitution: 0.45, friction: 0.06, frictionAir: 0.012, density: 0.0016, angle: Math.random() * 6 });
+      M.Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.2);
+      var img = makeImg(pg, name, s); b.plugin.img = img; b.plugin.s = s;
+      img.style.transform = 'translate(' + (x - s / 2) + 'px,' + (y - s / 2) + 'px)';
+      M.Composite.add(world, b); items.push(b);
+      img.addEventListener('pointerdown', function (e) { grab(e, b, img); });
+      if (items.length > o.max) { var old = items.shift(); M.Composite.remove(world, old); old.plugin.img.remove(); }
+    };
+    var drop = function () {
+      var W0 = host.clientWidth, onRight = o.ramp && W0 >= 900;
+      for (var k = 0; k < o.count; k++) (function (k) {
+        setTimeout(function () { add(nextName(), W0 * (onRight ? 0.62 + 0.33 * Math.random() : 0.06 + 0.88 * Math.random()), o.startY() - Math.random() * o.jitter); }, 200 + k * 130);
+      })(k);
+    };
+    host.addEventListener('click', function (e) {
+      if (e.target.closest('a, button, .shape, .brief, .mail')) return;
+      var p = local(e); add(nextName(), p.x, o.clickY(p.y));
     });
-    var running = true;
+    var running = false;
     var tick = function () {
       if (!running) return;
       M.Engine.update(engine, 1000 / 60);
@@ -864,11 +989,22 @@ footer .brand { margin: 0; color: var(--ink); }
       }
       requestAnimationFrame(tick);
     };
-    new IntersectionObserver(function (es) { var was = running; running = es[0].isIntersecting; if (running && !was) requestAnimationFrame(tick); }).observe(hero);
-    requestAnimationFrame(tick);
+    var dropped = false;
+    new IntersectionObserver(function (es) {
+      var vis = es[0].isIntersecting, was = running; running = vis;
+      if (vis && !dropped && es[0].intersectionRatio >= o.dropAt) { dropped = true; drop(); }
+      if (running && !was) requestAnimationFrame(tick);
+    }, { threshold: [0, 0.15, 0.3] }).observe(host);
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(buildWalls, 150); });
   };
-  if (document.readyState === 'complete') physics(); else window.addEventListener('load', physics);
+  var hero = document.getElementById('top'), contact = document.getElementById('contact');
+  var startPlaygrounds = function () {
+    playground(hero, document.getElementById('playground'), { ramp: true, count: small ? 8 : 14, max: small ? 16 : 22, dropAt: 0, jitter: 200,
+      startY: function () { return -80; }, clickY: function (y) { return Math.min(y, 40) - 60; } });
+    playground(contact, document.getElementById('playground2'), { ramp: false, count: small ? 7 : 12, max: small ? 14 : 20, dropAt: 0.15, jitter: 20,
+      startY: function () { return document.querySelector('.socials').getBoundingClientRect().bottom - contact.getBoundingClientRect().top + (small ? 90 : 145); }, clickY: function (y) { return y - 70; } });
+  };
+  if (document.readyState === 'complete') startPlaygrounds(); else window.addEventListener('load', startPlaygrounds);
 })();
 </script>
 </body>
