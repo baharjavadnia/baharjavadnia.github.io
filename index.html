@@ -258,8 +258,8 @@ dialog.viewer::backdrop { background: var(--paper); }
   transform: rotate(-2deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1); will-change: transform; }
 .avatar:hover .stage { transform: rotate(0deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
 .avatar.tilting .stage, .avatar.tilting .person, .avatar.tilting .weight { transition-duration: .12s; }
-.pic { position: relative; display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: var(--pic); }
-.pic .person { position: relative; width: 94%; display: block; margin-bottom: -1%;
+.pic { position: relative; display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--pic); }
+.pic .person { position: relative; width: 100%; height: auto; display: block;
   translate: calc(var(--px, 0) * -6px) calc(var(--py, 0) * -4px); transition: translate .6s cubic-bezier(.2,.8,.2,1); }
 .sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s ease;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.4), rgba(255,255,255,0) 46%); }
@@ -470,12 +470,11 @@ footer .brand { margin: 0; color: var(--ink); }
       <div class="portrait reveal">
         <div class="avatar" id="avatar">
           <div class="stage">
-            <span class="pic"><img class="person" src="assets/character.svg" alt="Illustrated portrait of Bahar" title="Illustration: Micah by Micah Lanier, CC BY 4.0"></span>
+            <span class="pic"><img class="person" src="assets/character.webp" width="720" height="900" alt="Illustrated character of Bahar with long dark brown curly hair, a white T-shirt and green trousers"></span>
             <span class="sheen" aria-hidden="true"></span>
           </div>
           <img class="weight" src="assets/shapes/s18.png" alt="">
         </div>
-        <!-- Illustration: "Micah" by Micah Lanier (https://www.dicebear.com/styles/micah/), licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). -->
       </div>
       <div class="story reveal">
         <p class="eyebrow"><span class="mark" data-shape="s15"><img src="assets/shapes/s15.png" alt=""></span>About me</p>
