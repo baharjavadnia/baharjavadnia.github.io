@@ -117,11 +117,14 @@ section.block { padding: clamp(80px, 11vw, 140px) 0 0; }
 .mark { position: relative; width: 34px; height: 34px; flex: 0 0 auto; display: inline-grid; place-items: center; margin: -6px 0; }
 .mark img { width: 34px; height: 34px; display: block; filter: drop-shadow(0 4px 6px rgba(25,23,43,.18)); transition: opacity .3s ease; }
 .mark::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0; transition: opacity .3s ease; }
-.travel .mark img { opacity: 0; }
-.travel .mark:not(.here)::after { opacity: .4; }
+.travel .mark:not(.set) img { opacity: 0; }
+.travel .mark:not(.set):not(.here)::after { opacity: .4; }
+.mark.landed img { animation: land .55s cubic-bezier(.3,1.6,.5,1); }
+@keyframes land { 0% { transform: scale(.55); } 60% { transform: scale(1.18); } 100% { transform: none; } }
 .traveller { position: fixed; left: 0; top: 0; z-index: 20; width: 34px; height: 34px; pointer-events: none; opacity: 0; scale: 1;
   transition: opacity .3s ease, scale .22s ease; filter: drop-shadow(0 4px 6px rgba(25,23,43,.22)); will-change: transform; }
 .traveller.on { opacity: 1; }
+.traveller.off { transition: none; }
 .traveller.pop { scale: .5; }
 .title { font-family: var(--serif); font-variation-settings: "SOFT" 100, "WONK" 0; font-weight: 600; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin: 0; max-width: 16ch; }
 .title em { font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--accent); }
@@ -668,35 +671,49 @@ footer .brand { margin: 0; color: var(--ink); }
   }, { rootMargin: '0px 0px -8% 0px' }) : null;
   document.querySelectorAll('.reveal').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
 
-  /* The travelling shape: one shape follows you down the page and settles into each section's marker */
+  /* The travelling shape: the first time you reach a section, a shape flies down from the last one and lands in its marker with a bounce.
+     Sections you have already reached keep their shape still, so scrolling back up stays calm. */
   var marks = Array.prototype.slice.call(document.querySelectorAll('.mark'));
   if (!reduce && marks.length) {
     root.classList.add('travel');
     var tr = document.createElement('img'); tr.className = 'traveller'; tr.alt = ''; tr.setAttribute('aria-hidden', 'true');
     document.body.appendChild(tr);
-    var px = 0, py = 0, active = -1, running = false, half = 17;
+    var px = 0, py = 0, target = -1, furthest = -1, running = false, half = 17;
+    var centre = function (m) { var r = m.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; };
     var pick = function () {
       var line = window.innerHeight * 0.55, idx = -1;
       for (var i = 0; i < marks.length; i++) { if (marks[i].closest('section').getBoundingClientRect().top < line) idx = i; }
       return idx;
     };
+    var settle = function (i, bounce) {
+      var m = marks[i]; if (m.classList.contains('set')) return;
+      m.classList.add('set'); m.classList.remove('here');
+      if (bounce) { m.classList.remove('landed'); void m.offsetWidth; m.classList.add('landed'); }
+    };
+    var hide = function () { tr.classList.add('off'); tr.classList.remove('on'); target = -1; };
     var step = function () {
       var idx = pick();
-      if (idx === -1) { tr.classList.remove('on'); marks.forEach(function (m) { m.classList.remove('here'); }); active = -1; running = false; return; }
-      var r = marks[idx].getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + r.height / 2;
-      if (idx !== active) {
-        if (active === -1) { px = tx; py = ty - 140; }
-        var src = 'assets/shapes/' + marks[idx].getAttribute('data-shape') + '.png';
-        tr.classList.add('pop');
-        setTimeout(function () { tr.src = src; tr.classList.remove('pop'); }, 160);
-        marks.forEach(function (m, i) { m.classList.toggle('here', i === idx); });
-        active = idx; tr.classList.add('on');
+      if (idx !== -1 && !marks[idx].classList.contains('set') && idx !== target) {
+        if (idx < furthest) {
+          // Scrolling back into a section that was skipped: show its shape without any motion.
+          settle(idx, false);
+        } else {
+          // A new section further down: fly there from the last landing point, or drop in from above.
+          if (target !== -1) settle(target, true);
+          var from = furthest >= 0 ? centre(marks[furthest]) : null, to = centre(marks[idx]);
+          if (target === -1) { px = from ? from.x : to.x; py = from ? from.y : to.y - 140; }
+          tr.src = 'assets/shapes/' + marks[idx].getAttribute('data-shape') + '.png';
+          tr.classList.remove('off'); tr.classList.add('on');
+          marks.forEach(function (m, i) { m.classList.toggle('here', i === idx); });
+          target = idx; furthest = Math.max(furthest, idx);
+        }
       }
-      var dx = tx - px, dy = ty - py;
-      px += dx * 0.14; py += dy * 0.14;
-      var rot = Math.max(-28, Math.min(28, dy * 0.08 + dx * 0.08));
+      if (target === -1) { running = false; return; }
+      var t = centre(marks[target]), dx = t.x - px, dy = t.y - py;
+      px += dx * 0.16; py += dy * 0.16;
+      var rot = Math.max(-24, Math.min(24, (dx + dy) * 0.06));
       tr.style.transform = 'translate(' + (px - half).toFixed(1) + 'px,' + (py - half).toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg)';
-      if (Math.abs(dx) + Math.abs(dy) < 0.3) { running = false; return; }
+      if (Math.abs(dx) + Math.abs(dy) < 1.2) { settle(target, true); hide(); running = false; return; }
       requestAnimationFrame(step);
     };
     var kick = function () { if (!running) { running = true; requestAnimationFrame(step); } };
