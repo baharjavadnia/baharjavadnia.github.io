@@ -90,9 +90,6 @@ img { max-width: 100%; }
 .status { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 500; padding: 7px 14px 7px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
 .status i { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); position: relative; }
 .status i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--ok); opacity: .5; animation: ping 2s ease-out infinite; }
-.status i.off { background: var(--muted); opacity: .6; }
-.status i.off::after { display: none; }
-.status #status-text { font-variant-numeric: tabular-nums; }
 @keyframes ping { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.6); opacity: 0; } }
 .hero h1 { font-family: var(--serif); font-weight: 600; font-variation-settings: "SOFT" 100, "WONK" 0; font-size: clamp(56px, 10vw, 140px); line-height: .95; letter-spacing: -0.035em; margin: 26px 0 26px; }
 .hero h1 em { font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--accent); }
@@ -394,7 +391,7 @@ footer .brand { margin: 0; color: var(--ink); }
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="status"><i aria-hidden="true" id="status-dot"></i><span id="status-text">Based in Tehran</span></span>
+    <span class="status"><i aria-hidden="true"></i>Open to the right opportunity</span>
     <h1>Hi, I'm <em>Bahar</em>.</h1>
     <p class="lede">Product manager and designer in Tehran, working remotely. I bring <b>business, marketing, design and product</b> to one table.</p>
     <div class="cta">
@@ -655,19 +652,6 @@ footer .brand { margin: 0; color: var(--ink); }
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
-
-  /* Hero status: local time in Tehran; the dot is green during working hours */
-  var stText = document.getElementById('status-text'), stDot = document.getElementById('status-dot');
-  var tick = function () {
-    try {
-      var now = new Date();
-      var time = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'Asia/Tehran' }).format(now).replace(' AM', ' am').replace(' PM', ' pm');
-      var hour = parseInt(new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: 'Asia/Tehran' }).format(now), 10);
-      stText.textContent = time + ' in Tehran';
-      stDot.classList.toggle('off', hour < 9 || hour >= 19);
-    } catch (e) { stText.textContent = 'Based in Tehran'; }
-  };
-  tick(); setInterval(tick, 30000);
 
   /* Theme toggle */
   document.getElementById('theme').addEventListener('click', function () {
