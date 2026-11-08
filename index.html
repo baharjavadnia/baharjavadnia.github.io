@@ -589,9 +589,9 @@ footer .brand { margin: 0; color: var(--ink); }
       <div class="brief">
         <p class="brief-q" id="q-type">What brings you here?</p>
         <div class="brief-row" role="group" aria-labelledby="q-type">
-          <button class="pick" type="button" data-type="job" aria-pressed="true">A full-time role</button>
-          <button class="pick" type="button" data-type="project" aria-pressed="false">A freelance project</button>
-          <button class="pick" type="button" data-type="hi" aria-pressed="false">Just saying hi</button>
+          <button class="pick" type="button" data-type="hi" aria-pressed="true">Just saying hi</button>
+          <button class="pick" type="button" data-type="question" aria-pressed="false">A question about my work</button>
+          <button class="pick" type="button" data-type="together" aria-pressed="false">Working together</button>
         </div>
         <p class="brief-q" id="q-topic">What's it about?<span>Pick any</span></p>
         <div class="brief-row" role="group" aria-labelledby="q-topic">
@@ -887,8 +887,8 @@ footer .brand { margin: 0; color: var(--ink); }
     var on = topicPicks.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; });
     var topics = listOf(on.map(function (b) { return b.getAttribute('data-topic'); }));
     var line, subject;
-    if (type === 'job') { line = 'Hi Bahar, we’re hiring, and I’d love to talk with you about a full-time role' + (topics ? ' in ' + topics : '') + '.'; subject = 'A full-time role'; }
-    else if (type === 'project') { line = 'Hi Bahar, I have a project I’d love your help with' + (topics ? ', mainly ' + topics : '') + '.'; subject = 'A freelance project'; }
+    if (type === 'question') { line = 'Hi Bahar, I saw your portfolio and had a question about your work' + (topics ? ' on ' + topics : '') + '.'; subject = 'A question about your work'; }
+    else if (type === 'together') { line = 'Hi Bahar, I’d love to talk about working together' + (topics ? ' on ' + topics : '') + '.'; subject = 'Working together'; }
     else { line = 'Hi Bahar, I came across your portfolio and wanted to say hello' + (topics ? ', and chat about ' + topics : '') + '.'; subject = 'Hello from your portfolio'; }
     if (on.length) subject += ': ' + on.map(function (b) { return b.getAttribute('data-short'); }).join(', ');
     return { line: line, subject: subject };
