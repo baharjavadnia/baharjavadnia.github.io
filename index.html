@@ -257,10 +257,16 @@ dialog.viewer::backdrop { background: var(--paper); }
   box-shadow: 0 2px 4px rgba(25,23,43,.05), 0 24px 50px rgba(25,23,43,.12);
   transform: rotate(-2deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1); will-change: transform; }
 .avatar:hover .stage { transform: rotate(0deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
-.avatar.tilting .stage, .avatar.tilting .person, .avatar.tilting .weight { transition-duration: .12s; }
-.pic { position: relative; display: flex; align-items: flex-end; justify-content: center; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--pic); }
-.pic .person { position: relative; width: 100%; height: auto; display: block;
+.avatar.tilting .stage, .avatar.tilting .figure, .avatar.tilting .weight { transition-duration: .12s; }
+.pic { position: relative; display: block; aspect-ratio: 1; border-radius: 16px; overflow: hidden; background: #FEFEFE; }
+.figure { position: relative; display: block; width: 100%; scale: 1.03;
   translate: calc(var(--px, 0) * -6px) calc(var(--py, 0) * -4px); transition: translate .6s cubic-bezier(.2,.8,.2,1); }
+.figure .person { width: 100%; height: auto; display: block; }
+.eye { position: absolute; left: var(--l); top: var(--t); width: var(--s); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: #3F2718; }
+.eye .white { position: absolute; inset: var(--ring); border-radius: 50%; background: #FBFBFB; overflow: hidden; }
+.pupil { position: absolute; width: var(--ps); aspect-ratio: 1; border-radius: 50%; translate: -50% -50%;
+  left: calc(50% + var(--ox, var(--rx)) * 50%); top: calc(50% + var(--oy, var(--ry)) * 50%);
+  background: radial-gradient(circle at 64% 32%, #fff 0 14%, transparent 15%), #2E1D12; transition: left .2s ease-out, top .2s ease-out; }
 .sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .4s ease;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(255,255,255,.4), rgba(255,255,255,0) 46%); }
 .avatar:hover .sheen { opacity: 1; }
@@ -367,7 +373,7 @@ footer .brand { margin: 0; color: var(--ink); }
   .status i::after, .doc .ln { animation: none; }
   .marquee .track { animation: none; flex-wrap: wrap; width: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .stage, .pic .person, .weight { transition: none; }
+  .stage, .figure, .weight, .pupil { transition: none; }
 }
 </style>
 </head>
@@ -470,7 +476,7 @@ footer .brand { margin: 0; color: var(--ink); }
       <div class="portrait reveal">
         <div class="avatar" id="avatar">
           <div class="stage">
-            <span class="pic"><img class="person" src="assets/character.webp" width="720" height="900" alt="Illustrated character of Bahar with long dark brown curly hair, a white T-shirt and green trousers"></span>
+            <span class="pic"><span class="figure"><img class="person" src="assets/character.webp" width="900" height="900" alt="Illustrated character of Bahar with long dark brown curly hair and a white T-shirt"><span class="eye" style="--l:60.06%;--t:33.08%;--s:13.994%;--ring:9.69%;--ps:58.94%;--rx:0.602;--ry:-0.753" aria-hidden="true"><span class="white"><i class="pupil"></i></span></span><span class="eye" style="--l:36.48%;--t:42.703%;--s:14.63%;--ring:7.53%;--ps:54.33%;--rx:0.486;--ry:-0.641" aria-hidden="true"><span class="white"><i class="pupil"></i></span></span></span></span>
             <span class="sheen" aria-hidden="true"></span>
           </div>
           <img class="weight" src="assets/shapes/s18.png" alt="">
@@ -901,6 +907,26 @@ footer .brand { margin: 0; color: var(--ink); }
     if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () {}); 
   });
   refresh(false);
+
+  /* About: the character's eyes follow the cursor, and drift back to her upward glance when it rests */
+  var eyeEls = Array.prototype.slice.call(document.querySelectorAll('.eye'));
+  if (eyeEls.length) {
+    var pending = null, idle;
+    var rest = function () { eyeEls.forEach(function (e) { e.style.removeProperty('--ox'); e.style.removeProperty('--oy'); }); };
+    var look = function () {
+      var ev = pending; pending = null;
+      eyeEls.forEach(function (e) {
+        var w = e.querySelector('.white').getBoundingClientRect(), cx = w.left + w.width / 2, cy = w.top + w.height / 2;
+        var dx = ev.clientX - cx, dy = ev.clientY - cy, dist = Math.hypot(dx, dy) || 1, k = Math.min(1, dist / 160) * 0.82;
+        e.style.setProperty('--ox', (dx / dist * k).toFixed(3)); e.style.setProperty('--oy', (dy / dist * k).toFixed(3));
+      });
+      clearTimeout(idle); idle = setTimeout(rest, 4000);
+    };
+    var about = document.getElementById('about'), aboutSeen = false;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { aboutSeen = es[0].isIntersecting; if (!aboutSeen) rest(); }).observe(about); else aboutSeen = true;
+    window.addEventListener('pointermove', function (ev) { if (!aboutSeen) return; if (!pending) requestAnimationFrame(look); pending = ev; }, { passive: true });
+    document.addEventListener('pointerleave', rest);
+  }
 
   /* Copy email */
   var copy = document.getElementById('copy');
